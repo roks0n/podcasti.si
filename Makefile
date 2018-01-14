@@ -21,7 +21,7 @@ build:
 runserver: ## Run podcasts service
 	@echo "==="
 	@echo "You can find podcasts by pointing your browser at $(COLOR_HL)$(DOCKER_IP):8061$(COLOR_RESET)"
-	echo "==="
+	@echo "==="
 	docker-compose up $(NAME)
 
 .PHONY: wakeup-database
@@ -29,7 +29,7 @@ wakeup-database:
 	docker-compose up -d db
 	@echo "==="
 	@echo "Sleeping for a few seconds to make sure the database wakes up!"
-	echo "==="
+	@echo "==="
 	sleep 3s
 
 .PHONY: bash
