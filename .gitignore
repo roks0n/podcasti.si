@@ -1,0 +1,17 @@
+*.egg-info
+*.py[co]
+*.sublime-workspace
+*~
+.*
+\#*#
+coverage.xml
+!.circle
+!.editorconfig
+!.gitignore
+!.coveragerc
+*htmlcov
+static/
+*site/
+pip-compile_output.txt
+requirements.txt.bak
+!.dockerignore

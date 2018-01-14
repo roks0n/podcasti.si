@@ -1,0 +1,15 @@
+Django==1.11.4
+django-environ==0.4.4
+djangorestframework==3.6.4
+gevent==1.2.2
+greenlet==0.4.12
+ipdb==0.10.3
+ipython==5.4.1
+psycogreen==1.0
+psycopg2==2.7.3.1
+requests==2.18.4
+responses==0.7.0
+six==1.10.0
+statsd==3.2.1
+uwsgi==2.0.15
+whitenoise==3.3.0
