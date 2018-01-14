@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
+from django.views.generic import TemplateView
 
 
 def health(request):
@@ -10,5 +11,5 @@ def health(request):
     return HttpResponse('')
 
 
-def index(request):
-    return HttpResponse('')
+class IndexView(TemplateView):
+    template_name = "index.html"

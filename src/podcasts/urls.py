@@ -8,5 +8,5 @@ from podcasts import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^health/', views.health),
-    url(r'^$', views.index),
+    url(r'^$', views.IndexView.as_view()),
 ]
