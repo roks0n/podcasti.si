@@ -1,10 +1,13 @@
+boto3==1.5.14
 Django==2.0.1
 django-environ==0.4.4
 djangorestframework==3.7.7
+django-storages==1.6.5
 gevent==1.2.2
 greenlet==0.4.12
 ipdb==0.10.3
 ipython==5.4.1
+Pillow==5.0.0
 psycogreen==1.0
 psycopg2==2.7.3.1
 requests==2.18.4

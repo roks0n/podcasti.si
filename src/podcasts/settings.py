@@ -8,6 +8,7 @@ import environ
 
 import requests
 
+
 root = environ.Path(__file__) - 3
 env = environ.Env()
 
@@ -27,11 +28,7 @@ STATSD_HOST = env.url('STATSD_URL', 'udp://172.17.42.1:8125').hostname
 STATSD_PORT = env.url('STATSD_URL', 'udp://172.17.42.1:8125').port
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
-SECRET_KEY = env.str('SECRET_KEY')
-
-AWS_REGION = env.str('AWS_REGION', 'eu-west-1')
-AWS_ACCESS_KEY_ID = env.str('AWS_ACCESS_KEY_ID', default=None)
-AWS_SECRET_ACCESS_KEY = env.str('AWS_SECRET_ACCESS_KEY', default=None)
+SECRET_KEY = env.str('SECRET_KEY', default='please-dont-use-me-in-production')
 
 EC2_PRIVATE_IP = None
 try:
@@ -53,6 +50,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'storages',
     'podcasts',
 )
 
@@ -117,6 +115,20 @@ STATICFILES_DIRS = (
     root('static-source/'),
 )
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+# S3 settings for uploaded files
+AWS_STORAGE_BUCKET_NAME = env.str('AWS_STORAGE_BUCKET_NAME', default=None)
+AWS_S3_REGION_NAME = env.str('AWS_REGION', default=None)
+AWS_ACCESS_KEY_ID = env.str('AWS_ACCESS_KEY_ID', default=None)
+AWS_SECRET_ACCESS_KEY = env.str('AWS_SECRET_ACCESS_KEY', default=None)
+MEDIA_URL = env.str('MEDIA_URL', default='/media/')
+if DEBUG:
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+    MEDIA_ROOT = root('../media/')
+else:
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    AWS_S3_SIGNATURE_VERSION = 's3v4'
+    MEDIA_ROOT = ''
 
 LOGGING = {
     'version': 1,
