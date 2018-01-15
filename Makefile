@@ -20,7 +20,7 @@ build:
 .PHONY: runserver
 runserver: ## Run podcasts service
 	@echo "==="
-	@echo "You can find podcasts by pointing your browser at $(COLOR_HL)$(DOCKER_IP):8061$(COLOR_RESET)"
+	@echo "You can find podcasts by pointing your browser at $(COLOR_HL)$(DOCKER_IP):8000$(COLOR_RESET)"
 	@echo "==="
 	docker-compose up $(NAME)
 
