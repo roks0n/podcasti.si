@@ -9,7 +9,7 @@ class Podcast(models.Model):
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(blank=True, null=True)
     website = models.URLField(max_length=256, blank=True, null=True)
-    authors = models.CharField(max_length=30, blank=True, null=True)
+    authors = models.CharField(max_length=256, blank=True, null=True)
     feed_url = models.URLField(max_length=256)
     last_sync = models.DateTimeField(blank=True, null=True)
 
