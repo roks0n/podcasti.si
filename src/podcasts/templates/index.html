@@ -4,6 +4,7 @@
     {% include 'includes/header.html' %}
 
     <div class="grid-container">
+        <h4 class="index__title">Najnovejše epizode</h4>
         {% if latest_episodes %}
             {% for episode in latest_episodes %}
                 {% include 'modules/episode-item.html' %}

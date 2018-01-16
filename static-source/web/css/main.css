@@ -82,6 +82,16 @@ hr {
     font-size: 2em;
 }
 
+
 .player {
     width: 100%;
+}
+
+
+.index__title {
+    margin-bottom: 1.3em;
+    width: auto;
+    display: table;
+    border-left: 6px solid #412b40;
+    padding-left: 0.5em;
 }
