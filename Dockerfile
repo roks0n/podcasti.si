@@ -18,3 +18,5 @@ RUN rm -rf /var/cache/apt && \
 
 COPY . /home/app/code
 WORKDIR /home/app/code
+
+RUN django-admin collectstatic --no-input
