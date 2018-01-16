@@ -65,8 +65,8 @@ class EpisodeView(TemplateView):
         episode = get_object_or_404(Episode, slug=episode_slug)
         context.update({
             'seo': {
-                'title': episode.title,
-                'description': '',
+                'title': '{} | podcasti.si'.format(episode.title),
+                'description': episode.description,
             },
             'header': {
                 'url': 'https://podcasti.si',
