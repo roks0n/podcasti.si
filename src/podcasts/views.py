@@ -27,7 +27,7 @@ class IndexView(TemplateView):
         page = self.request.GET.get('page')
 
         latest_episodes = Episode.objects.order_by('-published_datetime')
-        paginator = Paginator(latest_episodes, 25)
+        paginator = Paginator(latest_episodes, 50)
         latest_episodes = paginator.get_page(page)
 
         for episode in latest_episodes:
@@ -43,11 +43,11 @@ class IndexView(TemplateView):
 
         context.update({
             'seo': {
-                'title': '',
-                'description': '',
+                'title': 'Slovenski Podcasti - seznam slovenskih podcastov',
+                'description': 'Največji seznam slovenskih podcastov na spletu.',
             },
             'header': {
-                'url': 'example.com',
+                'url': 'https://podcasti.si',
                 'title': 'Slovenski Podcasti',
                 'subtitle': 'Seznam vseh slovenskih podcastov'
             },
@@ -65,11 +65,11 @@ class EpisodeView(TemplateView):
         episode = get_object_or_404(Episode, slug=episode_slug)
         context.update({
             'seo': {
-                'title': '',
+                'title': self.episode.title,
                 'description': '',
             },
             'header': {
-                'url': 'example.com',
+                'url': 'https://podcasti.si',
                 'title': 'Slovenski Podcasti',
                 'subtitle': 'Seznam vseh slovenskih podcastov'
             },
