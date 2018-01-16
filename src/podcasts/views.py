@@ -65,7 +65,7 @@ class EpisodeView(TemplateView):
         episode = get_object_or_404(Episode, slug=episode_slug)
         context.update({
             'seo': {
-                'title': self.episode.title,
+                'title': episode.title,
                 'description': '',
             },
             'header': {
