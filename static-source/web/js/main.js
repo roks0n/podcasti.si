@@ -22,6 +22,7 @@ $(document).ready(function() {
     if (socialPhotosContainer.length === 1) {
         generateInstagramPhotoFeed();
     }
+    plyr.setup();
 });
 
 function generateInstagramPhotoFeed() {

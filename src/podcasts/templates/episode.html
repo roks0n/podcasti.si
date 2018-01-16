@@ -4,10 +4,44 @@
     {% include 'includes/header.html' %}
 
     <div class="grid-container">
+        <nav aria-label="Nahajaš se tukaj:" role="navigation">
+          <ul class="breadcrumbs">
+        <li><a href="{% url 'home' %}">Domov</a></li>
+            <li>
+              <span class="show-for-sr">Trenutno: </span> {{ episode.title }}
+            </li>
+          </ul>
+        </nav>
+        <hr>
+        <h1 class="episode-page__title">
+            {{ episode.title }}
+        </h1>
         <div class="grid-x grid-margin-x">
-            <div class="large-12 cell">
-                <h1>{{ episode.title }}</h1>
+            <div class="large-8 cell">
                 <p>{{ episode.description }}</p>
+
+                {% if episode.audio %}
+                    <audio controls class="player">
+                        <source src="{{ episode.audio }}" type="audio/mp3">
+                    </audio>
+                    <br>
+                {% endif %}
+            </div>
+            <div class="large-4 cell">
+                <ul>
+                    <li><i class="fas fa-calendar-alt"></i> <b>Objavljeno</b>: {{ episode.published_datetime | date:'d.m.Y H:i' }}</li>
+                    <li><i class="fas fa-columns"></i> <b>WWW</b>:
+                        <ul>
+                            <li>
+                                <a href="{{ episode.url }}" target="_blank">Stran epizode</a>
+                            </li>
+                            <li>
+                                <a href="{{ episode.podcast.website }}" target="_blank">Domača stran</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><i class="fas fa-users"></i> <b>Avtor</b>: {{ episode.podcast.authors }}</li>
+                </ul>
             </div>
         </div>
     </div>

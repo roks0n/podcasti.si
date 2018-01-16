@@ -73,3 +73,15 @@ hr {
     display: grid;
     text-align: center;
 }
+
+
+.episode-page {
+
+}
+.episode-page__title {
+    font-size: 2em;
+}
+
+.player {
+    width: 100%;
+}

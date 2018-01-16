@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
-from lxml import etree as ET, html as lh
+from lxml import etree as ET
 
 import requests
 
