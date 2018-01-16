@@ -32,9 +32,11 @@
                     <li><i class="fas fa-calendar-alt"></i> <b>Objavljeno</b>: {{ episode.published_datetime | date:'d.m.Y H:i' }}</li>
                     <li><i class="fas fa-columns"></i> <b>WWW</b>:
                         <ul>
-                            <li>
-                                <a href="{{ episode.url }}" target="_blank">Stran epizode</a>
-                            </li>
+                            {% if episode.url %}
+                                <li>
+                                    <a href="{{ episode.url }}" target="_blank">Stran epizode</a>
+                                </li>
+                            {% endif %}
                             <li>
                                 <a href="{{ episode.podcast.website }}" target="_blank">Domača stran</a>
                             </li>
