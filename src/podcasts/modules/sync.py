@@ -8,9 +8,6 @@ def sync_podcast(podcast):
     episodes = parser.parse()
 
     for episode in episodes:
-        episode.update({
-            'podcast': podcast
-        })
-
         if not Episode.objects.filter(title=episode['title'], podcast=podcast).exists():
+            episode.update({'podcast': podcast})
             Episode.objects.create(**episode)

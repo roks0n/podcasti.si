@@ -1,0 +1,30 @@
+<div class="grid-x grid-margin-x episode">
+    <div class="shrink cell">
+        <a href="{% url 'episode' podcast_slug=episode.podcast_slug episode_slug=episode.slug %}">
+            <img src="{{ episode.image }}" alt="{{ episode.podcast_name }}" class="episode__image">
+        </a>
+    </div>
+    <div class="auto cell episode__content">
+        <h3 class="episode__title">
+            <a href="{% url 'episode' podcast_slug=episode.podcast_slug episode_slug=episode.slug %}">
+                {{ episode.title }}
+            </a>
+        </h3>
+        <p class="episode__podcast">
+            <a href="#">{{ episode.podcast_name }}</a>
+        </p>
+    </div>
+     <div class="shrink cell episode__published">
+        Objavljeno<br/>
+        {{ episode.published }}
+    </div>
+    <div class="shrink cell episode__content">
+        <a href="{% url 'episode' podcast_slug=episode.podcast_slug episode_slug=episode.slug %}">
+            Odpri epizodo
+        </a>
+    </div>
+</div>
+
+<div class="small-12 cell">
+    <hr>
+</div>

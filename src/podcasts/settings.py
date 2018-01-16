@@ -6,8 +6,6 @@ Django settings for podcasts project.
 
 import environ
 
-import requests
-
 
 root = environ.Path(__file__) - 3
 env = environ.Env()
@@ -24,22 +22,8 @@ DATABASES = {
     'default': env.db_url('DATABASE_URL', default='postgres://postgres:postgres@db:5432/postgres')
 }
 
-STATSD_HOST = env.url('STATSD_URL', 'udp://172.17.42.1:8125').hostname
-STATSD_PORT = env.url('STATSD_URL', 'udp://172.17.42.1:8125').port
-
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 SECRET_KEY = env.str('SECRET_KEY', default='please-dont-use-me-in-production')
-
-EC2_PRIVATE_IP = None
-try:
-    EC2_PRIVATE_IP = requests.get(
-        'http://169.254.169.254/latest/meta-data/local-ipv4',
-        timeout=0.05).text
-except requests.exceptions.RequestException:
-    pass
-
-if EC2_PRIVATE_IP:
-    ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
 
 # Application definition
 INSTALLED_APPS = (

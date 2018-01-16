@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.utils.text import slugify
 
 
 class Podcast(models.Model):
     name = models.CharField(max_length=256)
+    slug = models.SlugField(max_length=256)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(blank=True, null=True)
     website = models.URLField(max_length=256, blank=True, null=True)
@@ -17,10 +19,16 @@ class Podcast(models.Model):
     def __repr__(self):
         return '<Podcast "{}">'.format(self.name)
 
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
 
 class Episode(models.Model):
     podcast = models.ForeignKey(Podcast, on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=256)
+    slug = models.SlugField(max_length=256)
     description = models.TextField()
     published_datetime = models.DateTimeField()
     audio = models.URLField(max_length=256, blank=True, null=True)
@@ -31,3 +39,8 @@ class Episode(models.Model):
 
     def __repr__(self):
         return '<Episode "{}" from "{}">'.format(self.title, self.podcast.name)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)

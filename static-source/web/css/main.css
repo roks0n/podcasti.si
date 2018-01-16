@@ -1,7 +1,12 @@
+hr {
+    width: 100%;
+}
+
 .header {
     width: 100%;
+    background-image: url(../img/matt-botsford-197870.jpg);
     background-size: cover;
-    background-position: top center;
+    background-position: center center;
     padding: 2em 0;
     position: relative;
     margin-bottom: 2em;
@@ -38,62 +43,33 @@
 }
 
 
-.place {
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
+.episode {
+    width: 100%;
+    margin-bottom: 1em;
 }
-.place__items {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.episode a {
+    color: #0a0a0a;
 }
-.place__item {
-    font-size: 0.8em;
-    padding: 0.25em 0;
+.episode__content {
+    align-content: space-evenly;
+    display: grid;
 }
-.place__title {
-    padding: 0.25em 0;
-    font-size: 1.8em;
-    margin: 0;
-}
-
-.tag {
-    margin-right: 1em;
-    margin-left: 0.3em;
-}
-
-
-.footer {
-    margin: 1em auto;
-    font-size: 0.8em;
-}
-
-
-.place-page__title {
-    padding: 0.25em 0;
-    font-size: 2.2em;
-    margin: 0;
+.episode__title {
+    font-size: 1.2em;
     font-weight: 500;
-}
-
-.place-page__items {
-    list-style: none;
-    padding: 0;
     margin: 0;
 }
-.place-page__item {
-    font-size: 1em;
-    padding: 0.4em 0;
-}
-
-.social-photos {
-    list-style: none;
-    padding: 0;
+.episode__podcast {
+    font-size: 0.8em;
     margin: 0;
 }
-.social-photos__photo {
-    width: 20%;
-    margin: 0;
-    padding: 0.2em;
-    float: left;
+.episode__image {
+    width: 60px;
+    border-radius: 5px;
+}
+.episode__published {
+    font-size: 0.9em;
+    align-content: space-evenly;
+    display: grid;
+    text-align: center;
 }

@@ -2,4 +2,17 @@
 
 {% block content %}
     {% include 'includes/header.html' %}
+
+    <div class="grid-container">
+        {% if latest_episodes %}
+            {% for episode in latest_episodes %}
+                {% include 'modules/episode-item.html' %}
+            {% endfor %}
+        {% else %}
+            No episodes.
+        {% endif %}
+    </div>
+
+    {% include 'modules/pagination.html' %}
+
 {% endblock %}

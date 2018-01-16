@@ -8,13 +8,14 @@
         <meta name="description" content="{{ seo.description }}">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="manifest" href="site.webmanifest">
         <link rel="apple-touch-icon" href="icon.png">
         <!-- Place favicon.ico in the root directory -->
 
         <link rel="stylesheet" href="{% static 'web/css/foundation.css' %}">
         <link rel="stylesheet" href="{% static 'web/css/font-icons.css' %}">
         <link rel="stylesheet" href="{% static 'web/css/main.css' %}">
+
+        <link rel="stylesheet" href="https://cdn.plyr.io/2.0.18/plyr.css">
     </head>
     <body>
         <!--[if lte IE 9]>
@@ -27,6 +28,7 @@
         {% block content %}
         {% endblock %}
 
+        <script src="https://cdn.plyr.io/2.0.18/plyr.js"></script>
         <script src="{% static 'web/js/vendor/modernizr-3.5.0.min.js' %}"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="{% static 'web/js/vendor/foundation.min.js' %}"></script>

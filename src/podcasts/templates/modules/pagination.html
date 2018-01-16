@@ -1,0 +1,37 @@
+<ul class="pagination text-center" role="navigation" aria-label="Pagination">
+    {% if paginator.has_previous %}
+        <li>
+            <a href="?page=1">First</a>
+        </li>
+        <li class="pagination-previous">
+            <a href="?page={{ paginator.previous_page_number }}" arial-label="Previous page">
+                Previous
+            </a>
+        </li>
+    {% else %}
+        <li class="pagination-previous disabled">
+            Previous
+        </li>
+    {% endif%}
+
+    <li class="current">
+        <span class="show-for-sr">You're on page</span> Page {{ paginator.number }} of {{ paginator.paginator.num_pages }}
+    </li>
+
+    {% if paginator.has_next %}
+        <li class="pagination-next">
+            <a href="?page={{ paginator.next_page_number }}" aria-label="Next page">
+                Next
+            </a>
+        </li>
+        <li>
+            <a href="?page={{ paginator.paginator.num_pages }}" aria-label="Last page">
+                Last
+            </a>
+        </li>
+    {% else %}
+        <li class="pagination-next disabled">
+            Next
+        </li>
+    {% endif %}
+</ul>
