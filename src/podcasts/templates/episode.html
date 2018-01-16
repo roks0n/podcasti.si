@@ -4,7 +4,12 @@
     {% include 'includes/header.html' %}
 
     <div class="grid-container">
-        <h1>{{ episode.title }}</h1>
+        <div class="grid-x grid-margin-x">
+            <div class="large-12 cell">
+                <h1>{{ episode.title }}</h1>
+                <p>{{ episode.description }}</p>
+            </div>
+        </div>
     </div>
 
 {% endblock %}
