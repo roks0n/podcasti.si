@@ -17,14 +17,16 @@
             {{ podcast.name }}
         </h1>
 
-        <div class="grid-x grid-margin-x">
-            <div class="large-8 cell">
-
-            </div>
-            <div class="large-4 cell">
-
-            </div>
-        </div>
+        <h4 class="index__title">Najnovejše epizode</h4>
+        {% if episodes %}
+            {% for episode in episodes %}
+                {% include 'modules/episode-item.html' %}
+            {% endfor %}
+        {% else %}
+            No episodes.
+        {% endif %}
     </div>
+
+    {% include 'modules/pagination.html' %}
 
 {% endblock %}

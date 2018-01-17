@@ -84,6 +84,25 @@ class PodcastView(TemplateView):
     def get_context_data(self, podcast_slug, **kwargs):
         context = super().get_context_data(**kwargs)
         podcast = get_object_or_404(Podcast, slug=podcast_slug)
+
+        episodes = []
+
+        page = self.request.GET.get('page')
+
+        latest_episodes = podcast.episode_set.order_by('-published_datetime')
+        paginator = Paginator(latest_episodes, 50)
+        latest_episodes = paginator.get_page(page)
+
+        for episode in latest_episodes:
+            episodes.append({
+                'title': episode.title,
+                'podcast_name': episode.podcast.name,
+                'published': pretty_date(episode.published_datetime),
+                'slug': episode.slug,
+                'podcast_slug': episode.podcast.slug,
+                'external_url': episode.url,
+            })
+
         context.update({
             'seo': {
                 'title': '{} | podcasti.si'.format(podcast.name),
@@ -94,6 +113,8 @@ class PodcastView(TemplateView):
                 'title': 'Slovenski Podcasti',
                 'subtitle': 'Seznam vseh slovenskih podcastov'
             },
-            'podcast': podcast
+            'podcast': podcast,
+            'episodes': episodes,
+            'paginator': latest_episodes
         })
         return context

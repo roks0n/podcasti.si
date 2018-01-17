@@ -1,9 +1,11 @@
 <div class="grid-x grid-margin-x episode">
-    <div class="shrink cell">
-        <a href="{% url 'episode' podcast_slug=episode.podcast_slug episode_slug=episode.slug %}">
-            <img src="{{ episode.image }}" alt="{{ episode.podcast_name }}" class="episode__image">
-        </a>
-    </div>
+    {% if episode.image %}
+        <div class="shrink cell">
+            <a href="{% url 'episode' podcast_slug=episode.podcast_slug episode_slug=episode.slug %}">
+                <img src="{{ episode.image }}" alt="{{ episode.podcast_name }}" class="episode__image">
+            </a>
+        </div>
+    {% endif %}
     <div class="auto cell episode__content">
         <h3 class="episode__title">
             <a href="{% url 'episode' podcast_slug=episode.podcast_slug episode_slug=episode.slug %}">
