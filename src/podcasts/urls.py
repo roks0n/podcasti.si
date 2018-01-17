@@ -9,7 +9,11 @@ from podcasts import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('health/', views.health),
-    path('', views.IndexView.as_view(), name='home'),
+    path(
+        '',
+        views.IndexView.as_view(),
+        name='home'
+    ),
     path(
         '<slug:podcast_slug>/ep/<slug:episode_slug>/',
         views.EpisodeView.as_view(),

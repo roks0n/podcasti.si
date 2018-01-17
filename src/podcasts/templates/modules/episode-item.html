@@ -11,7 +11,9 @@
             </a>
         </h3>
         <p class="episode__podcast">
-            <a href="#">{{ episode.podcast_name }}</a>
+            <a href="{% url 'podcast' podcast_slug=episode.podcast_slug %}">
+                {{ episode.podcast_name }}
+            </a>
         </p>
     </div>
      <div class="shrink cell episode__published">
