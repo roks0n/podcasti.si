@@ -12,6 +12,7 @@ class Podcast(models.Model):
     authors = models.CharField(max_length=256, blank=True, null=True)
     feed_url = models.URLField(max_length=256)
     last_sync = models.DateTimeField(blank=True, null=True)
+    created_datetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return 'Podcast "{}"'.format(self.name)
@@ -33,6 +34,7 @@ class Episode(models.Model):
     published_datetime = models.DateTimeField()
     audio = models.URLField(max_length=256, blank=True, null=True)
     url = models.URLField(max_length=256, blank=True, null=True)
+    created_datetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return 'Episode "{}" from "{}"'.format(self.title, self.podcast.name)
