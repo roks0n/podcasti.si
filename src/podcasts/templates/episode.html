@@ -5,15 +5,20 @@
 
     <div class="grid-container">
         <nav aria-label="Nahajaš se tukaj:" role="navigation">
-          <ul class="breadcrumbs">
-        <li><a href="{% url 'home' %}">Domov</a></li>
-            <li>
-              <span class="show-for-sr">Trenutno: </span> {{ episode.title }}
-            </li>
-          </ul>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'home' %}">Domov</a></li>
+                <li>
+                    <a href="{% url 'podcast' podcast_slug=episode.podcast.slug %}">
+                        {{ episode.podcast.name }}
+                    </a>
+                </li>
+                <li><span class="show-for-sr">Trenutno: </span> {{ episode.title }}</li>
+            </ul>
         </nav>
+
         <hr>
-        <h1 class="episode-page__title">
+
+        <h1 class="page__title">
             {{ episode.title }}
         </h1>
         <div class="grid-x grid-margin-x">

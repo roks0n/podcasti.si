@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
-from podcasts.models import Episode
+from podcasts.models import Episode, Podcast
 from podcasts.utils.time import pretty_date
 
 
@@ -74,5 +74,26 @@ class EpisodeView(TemplateView):
                 'subtitle': 'Seznam vseh slovenskih podcastov'
             },
             'episode': episode
+        })
+        return context
+
+
+class PodcastView(TemplateView):
+    template_name = 'podcast.html'
+
+    def get_context_data(self, podcast_slug, **kwargs):
+        context = super().get_context_data(**kwargs)
+        podcast = get_object_or_404(Podcast, slug=podcast_slug)
+        context.update({
+            'seo': {
+                'title': '{} | podcasti.si'.format(podcast.name),
+                'description': '',  # TODO
+            },
+            'header': {
+                'url': 'https://podcasti.si',
+                'title': 'Slovenski Podcasti',
+                'subtitle': 'Seznam vseh slovenskih podcastov'
+            },
+            'podcast': podcast
         })
         return context

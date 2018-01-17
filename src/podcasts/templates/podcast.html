@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'includes/header.html' %}
+
+    <div class="grid-container">
+        <nav aria-label="Nahajaš se tukaj:" role="navigation">
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'home' %}">Domov</a></li>
+                <li><span class="show-for-sr">Trenutno: </span> {{ podcast.name }}</li>
+            </ul>
+        </nav>
+
+        <hr>
+
+        <h1 class="page__title">
+            {{ podcast.name }}
+        </h1>
+
+        <div class="grid-x grid-margin-x">
+            <div class="large-8 cell">
+
+            </div>
+            <div class="large-4 cell">
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -14,5 +14,10 @@ urlpatterns = [
         '<slug:podcast_slug>/ep/<slug:episode_slug>/',
         views.EpisodeView.as_view(),
         name='episode'
+    ),
+    path(
+        '<slug:podcast_slug>/',
+        views.PodcastView.as_view(),
+        name='podcast'
     )
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
