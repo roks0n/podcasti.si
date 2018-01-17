@@ -47,9 +47,6 @@ hr {
     width: 100%;
     margin-bottom: 1em;
 }
-.episode a {
-    color: #0a0a0a;
-}
 .episode__content {
     align-content: space-evenly;
     display: grid;
@@ -72,6 +69,20 @@ hr {
     align-content: space-evenly;
     display: grid;
     text-align: center;
+}
+
+
+.podcast {
+    margin-bottom: 0.7em;
+}
+.podcast__content {
+    align-content: space-evenly;
+    display: grid;
+}
+.podcast__title {
+    font-size: 2em;
+    font-weight: 500;
+    margin: 0;
 }
 
 

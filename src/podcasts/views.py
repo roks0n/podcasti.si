@@ -105,8 +105,8 @@ class PodcastView(TemplateView):
 
         context.update({
             'seo': {
-                'title': '{} | podcasti.si'.format(podcast.name),
-                'description': '',  # TODO
+                'title': '{} Podcast | podcasti.si'.format(podcast.name),
+                'description': podcast.description
             },
             'header': {
                 'url': 'https://podcasti.si',

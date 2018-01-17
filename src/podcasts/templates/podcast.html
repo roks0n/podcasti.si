@@ -13,10 +13,26 @@
 
         <hr>
 
-        <h1 class="page__title">
-            {{ podcast.name }}
-        </h1>
+        <div class="grid-x grid-margin-x podcast">
+            {% if podcast.image %}
+                <div class="shrink cell">
+                    <img src="{{ podcast.image.url }}" alt="{{ podcast.name }}" class="episode__image">
+                </div>
+            {% endif %}
+            <div class="auto cell podcast__content">
+                <h1 class="podcast__title">
+                    {{ podcast.name }}
+                </h1>
+            </div>
+        </div>
+
         <p>{{ podcast.description }}</p>
+        <p>
+            <i class="fas fa-columns"></i> <b>WWW</b>:
+            <a href="{{ podcast.website }}" target="_blank">{{ podcast.website }}</a>
+        </p>
+
+        <br>
 
         <h4 class="index__title">Najnovejše epizode</h4>
         {% if episodes %}
