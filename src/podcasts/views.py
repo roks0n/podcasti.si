@@ -27,7 +27,7 @@ class IndexView(TemplateView):
         page = self.request.GET.get('page')
 
         latest_episodes = Episode.objects.order_by('-published_datetime')
-        paginator = Paginator(latest_episodes, 50)
+        paginator = Paginator(latest_episodes, 30)
         latest_episodes = paginator.get_page(page)
 
         for episode in latest_episodes:
@@ -94,7 +94,7 @@ class PodcastView(TemplateView):
         page = self.request.GET.get('page')
 
         latest_episodes = podcast.episode_set.order_by('-published_datetime')
-        paginator = Paginator(latest_episodes, 50)
+        paginator = Paginator(latest_episodes, 30)
         latest_episodes = paginator.get_page(page)
 
         for episode in latest_episodes:
