@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from podcasts.models import Episode
-from podcasts.modules.parsers.base import DefaultPodcastParser, ZakulisjeParser
+from podcasts.modules.parsers.base import DefaultPodcastParser, FilmStartParser, ZakulisjeParser
 
 
 def sync_podcast(podcast):
     if podcast.slug == 'zakulisje':
         parser = ZakulisjeParser(podcast.feed_url)
+    elif podcast.slug == 'filmstart':
+        parser = FilmStartParser(podcast.feed_url)
     else:
         parser = DefaultPodcastParser(podcast.feed_url)
 

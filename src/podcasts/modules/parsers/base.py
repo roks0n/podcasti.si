@@ -46,9 +46,6 @@ class BasePodcastParser():
     def parse_url(self):
         raise NotImplementedError
 
-    def parse_author(self):
-        raise NotImplementedError
-
 
 class DefaultPodcastParser(BasePodcastParser):
 
@@ -98,5 +95,29 @@ class ZakulisjeParser(BasePodcastParser):
     def parse_url(self, episode_xml):
         return episode_xml.find('link').text.strip()
 
-    def parse_author(self, episode_xml):
-        return episode_xml.find('dc:creator', namespaces=self.nsmap).text.strip()
+
+class FilmStartParser(BasePodcastParser):
+
+    def parse_title(self, episode_xml):
+        return episode_xml.find('title', namespaces=self.nsmap).text.strip()
+
+    def parse_description(self, episode_xml):
+        html_string = episode_xml.find('description', namespaces=self.nsmap).text
+        dom = ET.HTML(html_string)
+        description = dom.findall('.//p')[0].text.replace('[…]', '...')
+        return description
+
+    def parse_published_date(self, episode_xml):
+        datetime_string = episode_xml.find('pubDate', namespaces=self.nsmap).text.strip()
+        return datetime.strptime(datetime_string, '%a, %d %b %Y %H:%M:%S %z')
+
+    def parse_audio(self, episode_xml):
+        html_string = episode_xml.find('content:encoded', namespaces=self.nsmap).text.strip()
+        dom = ET.HTML(html_string)
+        for link in dom.findall('.//a'):
+            href = link.attrib.get('href')
+            if href and href.endswith('.mp3'):
+                return href
+
+    def parse_url(self, episode_xml):
+        return episode_xml.find('link').text.strip()

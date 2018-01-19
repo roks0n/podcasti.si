@@ -44,7 +44,10 @@ class IndexView(TemplateView):
         context.update({
             'seo': {
                 'title': 'Slovenski Podcasti - Največji seznam slovenskih podcastov',
-                'description': 'Največji seznam slovenskih podcastov. Odkrij, spremljaj in poslušaj slovenske podcaste.',
+                'description': (
+                    'Največji seznam slovenskih podcastov. Odkrij, spremljaj in poslušaj '
+                    'slovenske podcaste.'
+                ),
             },
             'header': {
                 'url': 'https://podcasti.si',
