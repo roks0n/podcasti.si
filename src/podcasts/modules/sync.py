@@ -10,7 +10,7 @@ def sync_podcast(podcast):
         parser = ZakulisjeParser(podcast.feed_url)
     elif podcast.slug == 'filmstart':
         parser = FilmStartParser(podcast.feed_url)
-    elif podcast.slug == 'torpedo':
+    elif podcast.slug in ['torpedo', 'membranje', 'fotkast', 'the-tranzistorij']:
         parser = TorpedoParser(podcast.feed_url)
     else:
         parser = DefaultPodcastParser(podcast.feed_url)
