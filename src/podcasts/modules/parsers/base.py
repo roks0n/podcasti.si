@@ -60,7 +60,9 @@ class DefaultPodcastParser(BasePodcastParser):
         return datetime.strptime(datetime_string, '%a, %d %b %Y %H:%M:%S %z')
 
     def parse_audio(self, episode_xml):
-        return episode_xml.find('enclosure').get('url')
+        enclosure = episode_xml.find('enclosure')
+        if enclosure is not None:
+            return enclosure.get('url')
 
     def parse_url(self, episode_xml):
         url = episode_xml.find('guid').text.strip()
