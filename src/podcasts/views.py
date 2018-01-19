@@ -52,7 +52,8 @@ class IndexView(TemplateView):
                 'subtitle': 'Seznam vseh slovenskih podcastov'
             },
             'latest_episodes': episodes,
-            'paginator': latest_episodes
+            'paginator': latest_episodes,
+            'featured_podcasts': Podcast.objects.order_by('?')[:8]
         })
         return context
 

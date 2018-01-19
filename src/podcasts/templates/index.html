@@ -1,7 +1,36 @@
 {% extends 'base.html' %}
 
+{% block json_ld %}
+<script type="application/ld+json">
+[{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "https://podcasti.si",
+    "name": "Slovenski Podcasti"
+}]
+</script>
+{% endblock %}
+
 {% block content %}
     {% include 'includes/header.html' %}
+
+    <div class="grid-container featured">
+        <h4 class="featured__title">Izpostavljeni podcasti</h4>
+        {% for podcast in featured_podcasts %}
+            <a href="{% url 'podcast' podcast_slug=podcast.slug %}">
+                <img src="{{ podcast.image.url }}" alt="{{ podcast.name }}" class="featured__image">
+            </a>
+            <a href="{% url 'podcast' podcast_slug=podcast.slug %}">
+                <img src="{{ podcast.image.url }}" alt="{{ podcast.name }}" class="featured__image">
+            </a>
+            <a href="{% url 'podcast' podcast_slug=podcast.slug %}">
+                <img src="{{ podcast.image.url }}" alt="{{ podcast.name }}" class="featured__image">
+            </a>
+            <a href="{% url 'podcast' podcast_slug=podcast.slug %}">
+                <img src="{{ podcast.image.url }}" alt="{{ podcast.name }}" class="featured__image">
+            </a>
+        {% endfor %}
+    </div>
 
     <div class="grid-container">
         <h4 class="index__title">Najnovejše epizode</h4>

@@ -12,11 +12,23 @@
         <link rel="apple-touch-icon" href="icon.png">
         <!-- Place favicon.ico in the root directory -->
 
+        {% if paginator.paginator.num_pages > 1 %}
+            {% if paginator.has_previous %}
+                <link rel="prev" href="?page={{ paginator.previous_page_number }}">
+            {% endif %}
+            {% if paginator.has_next %}
+                <link rel="next" href="?page={{ paginator.next_page_number }}">
+            {% endif %}
+        {% endif %}
+
         <link rel="stylesheet" href="{% static 'web/css/foundation.css' %}">
         <link rel="stylesheet" href="{% static 'web/css/font-icons.css' %}">
         <link rel="stylesheet" href="{% static 'web/css/main.css' %}">
 
         <link rel="stylesheet" href="https://cdn.plyr.io/2.0.18/plyr.css">
+
+        {% block json_ld %}
+        {% endblock %}
     </head>
     <body>
         <!--[if lte IE 9]>

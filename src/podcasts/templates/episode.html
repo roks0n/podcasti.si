@@ -1,5 +1,37 @@
 {% extends 'base.html' %}
 
+{% block json_ld %}
+<script type="application/ld+json">
+[{
+  "@context": "http://schema.org",
+  "@type": "RadioSeries",
+  "name": "{{ podcast.name }} Podcast",
+  "description": "{{ podcast.description }}",
+  "episode": {
+    "@type": "RadioEpisode",
+    "publication": [
+      {
+        "@type": "OnDemandEvent",
+        "startDate": "{{ episode.published_datetime | date:'Y-m-d' }}",
+        "publishedOn": {
+          "@type": "BroadcastService",
+          "url": "{{ episode.podcast.website }}"
+        },
+      }
+    ],
+  },
+},
+{
+  "@context": "http://schema.org",
+  "@type": "AudioObject",
+  "contentUrl": "{{ episode.audio }}",
+  "description": "{{ episode.title }}",
+  "encodingFormat": "mp3",
+  "name": "{{ episode.podcast.name }}"
+}]
+</script>
+{% endblock %}
+
 {% block content %}
     {% include 'includes/header.html' %}
 

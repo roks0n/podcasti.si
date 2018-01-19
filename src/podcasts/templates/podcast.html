@@ -1,5 +1,19 @@
 {% extends 'base.html' %}
 
+{% block json_ld %}
+<script type="application/ld+json">
+[{
+  "@context": "http://schema.org",
+  "@type": "RadioSeries",
+  "name": "{{ podcast.name }} Podcast",
+  "description": "{{ podcast.description }}",
+  "episode": {
+    "@type": "RadioEpisode",
+  },
+}]
+</script>
+{% endblock %}
+
 {% block content %}
     {% include 'includes/header.html' %}
 

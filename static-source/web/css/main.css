@@ -61,7 +61,7 @@ hr {
     margin: 0;
 }
 .episode__image {
-    width: 60px;
+    width: 80px;
     border-radius: 5px;
 }
 .episode__published {
@@ -105,4 +105,26 @@ hr {
     display: table;
     border-left: 6px solid #412b40;
     padding-left: 0.5em;
+}
+
+
+.featured {
+    text-align: center;
+    margin-bottom: 3em;
+}
+.featured__image {
+    width: 65px;
+    border-radius: 5px;
+    margin: 0.3em;
+}
+.featured__title {
+    border: 0;
+    text-align: center;
+    margin: 0 auto 0.5em;
+    border-bottom: 4px solid #412b40;
+    padding: 0;
+    color: #412b40;
+    font-size: 1.2em;
+    font-weight: 600;
+    display: table;
 }
