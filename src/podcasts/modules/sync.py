@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from podcasts.models import Episode
 from podcasts.modules.parsers.base import (
-    DefaultPodcastParser, FilmStartParser, TorpedoParser, ZakulisjeParser
+    BitniPogovoriParser, DefaultPodcastParser, FilmStartParser, TorpedoParser, ZakulisjeParser
 )
 
 
@@ -12,6 +12,8 @@ def sync_podcast(podcast):
         parser = FilmStartParser(podcast.feed_url)
     elif podcast.slug in ['torpedo', 'membranje', 'fotkast', 'the-tranzistorij']:
         parser = TorpedoParser(podcast.feed_url)
+    elif podcast.slug == 'bitni-pogovori':
+        parser = BitniPogovoriParser(podcast.feed_url)
     else:
         parser = DefaultPodcastParser(podcast.feed_url)
 

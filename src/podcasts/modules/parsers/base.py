@@ -55,7 +55,7 @@ class DefaultPodcastParser(BasePodcastParser):
         return episode_xml.find('title', namespaces=self.nsmap).text.strip()
 
     def parse_description(self, episode_xml):
-        return episode_xml.find('description', namespaces=self.nsmap).text.strip()
+        return episode_xml.find('description', namespaces=self.nsmap).text
 
     def parse_published_date(self, episode_xml):
         datetime_string = episode_xml.find('pubDate', namespaces=self.nsmap).text.strip()
@@ -172,3 +172,12 @@ class TorpedoParser(BasePodcastParser):
 
     def parse_author(self, episode_xml):
         return episode_xml.find('dc:author', namespaces=self.nsmap).text.strip()
+
+
+class BitniPogovoriParser(DefaultPodcastParser):
+
+    def parse_description(self, episode_xml):
+        return episode_xml.find('itunes:subtitle', namespaces=self.nsmap).text or ''
+
+    def parse_url(self, episode_xml):
+        return episode_xml.find('link').text.strip()
