@@ -6,9 +6,9 @@ from podcasts.models import Episode, Podcast
 
 @admin.register(Podcast)
 class PodcastAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ('name', 'authors',)
 
 
 @admin.register(Episode)
 class EpisodeAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ('title',)
