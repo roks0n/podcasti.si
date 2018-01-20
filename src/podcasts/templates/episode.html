@@ -5,8 +5,8 @@
 [{
   "@context": "http://schema.org",
   "@type": "RadioSeries",
-  "name": "{{ podcast.name }} Podcast",
-  "description": "{{ podcast.description }}",
+  "name": "{{ episode.podcast.name }} Podcast",
+  "description": "{{ episode.podcast.description }}",
   "episode": {
     "@type": "RadioEpisode",
     "publication": [
@@ -58,7 +58,7 @@
                 <p>{{ episode.description }}</p>
 
                 {% if episode.audio %}
-                    <audio controls class="player">
+                    <audio controls class="player" data-podcast="{{ episode.podcast.name }}" data-episode="{{ episode.title }}">
                         <source src="{{ episode.audio }}" type="audio/mp3">
                     </audio>
                     <br>
