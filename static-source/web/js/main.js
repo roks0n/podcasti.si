@@ -32,7 +32,7 @@ $(document).ready(function() {
         var podcastName = audio.getAttribute('data-podcast');
 
         gtag('event', 'play', {
-            'podcast': podcastName
+            'podcast': podcastName,
             'episode': episodeName
         });
     });
@@ -45,7 +45,7 @@ $(document).ready(function() {
         var episodeName = audio.getAttribute('data-episode');
 
         gtag('event', 'pause', {
-            'podcast': podcastName
+            'podcast': podcastName,
             'episode': episodeName
         });
     });
