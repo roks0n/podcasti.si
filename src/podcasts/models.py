@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 from django.utils.text import slugify
 
 
@@ -51,10 +52,10 @@ class Episode(models.Model):
 class Stats(models.Model):
     day = models.DateField(auto_now_add=True)
     views = models.IntegerField(default=1)
-    episode = models.ForeignKey(Episode, on_delete=models.CASCADE)
+    payload = JSONField(default=dict)
 
     def __str__(self):
-        return '{} from "{}"'.format(self.day, self.episode.title)
+        return '{} on "{}"'.format(self.payload['type'], self.day)
 
     def __repr__(self):
-        return '<Stats "{}" from "{}">'.format(self.day, self.episode.title)
+        return '<Stats "{}" on "{}">'.format(self.payload['type'], self.day)
