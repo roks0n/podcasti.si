@@ -13,7 +13,7 @@ def sync_podcast(podcast):
         parser = FilmStartParser(podcast.feed_url)
     elif podcast.slug in ['torpedo', 'membranje', 'fotkast', 'the-tranzistorij']:
         parser = TorpedoParser(podcast.feed_url)
-    elif podcast.slug == 'bitni-pogovori':
+    elif podcast.slug in ['bitni-pogovori', 'na-potezi']:
         parser = BitniPogovoriParser(podcast.feed_url)
     elif podcast.slug == ['bimpogovori']:
         parser = FeedBurnerParser(podcast.feed_url)
