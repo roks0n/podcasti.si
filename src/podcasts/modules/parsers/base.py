@@ -200,3 +200,8 @@ class FeedBurnerParser(BasePodcastParser):
 
     def parse_url(self, episode_xml):
         return episode_xml.find('feedburner:origLink', namespaces=self.nsmap).text
+
+
+class SoundcloudParser(DefaultPodcastParser):
+    def parse_url(self, episode_xml):
+        return
