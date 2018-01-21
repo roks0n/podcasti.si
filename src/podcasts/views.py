@@ -141,8 +141,8 @@ class AllPodcastsView(TemplateView):
 
         context.update({
             'seo': {
-                'title': '',  # TODO
-                'description': ''  # TODO
+                'title': 'Seznam vseh slovenskih podcastov | podcasti.si',
+                'description': 'Seznam vseh slovenskih podcastov na eni strani.'
             },
             'header': {
                 'url': 'https://podcasti.si',
