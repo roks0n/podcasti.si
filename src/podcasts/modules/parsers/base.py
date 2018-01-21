@@ -205,3 +205,13 @@ class FeedBurnerParser(BasePodcastParser):
 class SoundcloudParser(DefaultPodcastParser):
     def parse_url(self, episode_xml):
         return
+
+
+class TandemParser(DefaultPodcastParser):
+
+    def parse_description(self, episode_xml):
+        description = super().parse_description(episode_xml)
+        return description.strip().replace('\n', '')
+
+    def parse_url(self, episode_xml):
+        return

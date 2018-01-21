@@ -2,7 +2,7 @@
 from podcasts.models import Episode
 from podcasts.modules.parsers.base import (
     BitniPogovoriParser, DefaultPodcastParser, FeedBurnerParser, FilmStartParser, SoundcloudParser,
-    TorpedoParser, ZakulisjeParser
+    TandemParser, TorpedoParser, ZakulisjeParser
 )
 
 
@@ -19,6 +19,8 @@ def sync_podcast(podcast):
         parser = FeedBurnerParser(podcast.feed_url)
     elif 'feeds.soundcloud.com' in podcast.feed_url:
         parser = SoundcloudParser(podcast.feed_url)
+    elif podcast.slug == ['tandem']:
+        parser = TandemParser(podcast.feed_url)
     else:
         parser = DefaultPodcastParser(podcast.feed_url)
 
