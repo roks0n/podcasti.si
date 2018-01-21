@@ -66,7 +66,8 @@ class EpisodeView(TemplateView):
 
     def get_context_data(self, podcast_slug, episode_slug, **kwargs):
         context = super().get_context_data(**kwargs)
-        episode = get_object_or_404(Episode, slug=episode_slug)
+        podcast = get_object_or_404(Podcast, slug=podcast_slug)
+        episode = get_object_or_404(Episode, slug=episode_slug, podcast=podcast)
         context.update({
             'seo': {
                 'title': '{} | podcasti.si'.format(episode.title),
