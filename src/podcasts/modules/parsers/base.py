@@ -181,3 +181,22 @@ class BitniPogovoriParser(DefaultPodcastParser):
 
     def parse_url(self, episode_xml):
         return episode_xml.find('link').text.strip()
+
+
+class FeedBurnerParser(BasePodcastParser):
+
+    def parse_title(self, episode_xml):
+        return episode_xml.find('title', namespaces=self.nsmap).text.strip()
+
+    def parse_description(self, episode_xml):
+        return episode_xml.find('itunes:summary', namespaces=self.nsmap).text.strip()
+
+    def parse_published_date(self, episode_xml):
+        datetime_string = episode_xml.find('pubDate', namespaces=self.nsmap).text.strip()
+        return datetime.strptime(datetime_string, '%a, %d %b %Y %H:%M:%S %z')
+
+    def parse_audio(self, episode_xml):
+        return episode_xml.find('media:content', namespaces=self.nsmap).get('url')
+
+    def parse_url(self, episode_xml):
+        return episode_xml.find('feedburner:origLink', namespaces=self.nsmap).text
