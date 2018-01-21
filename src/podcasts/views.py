@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
 from podcasts.models import Episode, Podcast
+from podcasts.utils.stats import track_episode, track_podcast
 from podcasts.utils.time import pretty_date
 
 
@@ -68,6 +69,10 @@ class EpisodeView(TemplateView):
         context = super().get_context_data(**kwargs)
         podcast = get_object_or_404(Podcast, slug=podcast_slug)
         episode = get_object_or_404(Episode, slug=episode_slug, podcast=podcast)
+
+        track_episode(episode)
+        track_podcast(podcast)
+
         context.update({
             'seo': {
                 'title': '{} | podcasti.si'.format(episode.title),
@@ -90,7 +95,7 @@ class PodcastView(TemplateView):
         context = super().get_context_data(**kwargs)
         podcast = get_object_or_404(Podcast, slug=podcast_slug)
 
-        episodes = []
+        track_podcast(podcast)
 
         page = self.request.GET.get('page')
 
@@ -98,6 +103,7 @@ class PodcastView(TemplateView):
         paginator = Paginator(latest_episodes, 30)
         latest_episodes = paginator.get_page(page)
 
+        episodes = []
         for episode in latest_episodes:
             episodes.append({
                 'title': episode.title,
