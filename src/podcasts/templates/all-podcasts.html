@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block json_ld %}
+<script type="application/ld+json">
+[{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "https://podcasti.si/vsi-podcasti/",
+    "name": "Seznam vseh slovenskih podcastov"
+}]
+</script>
+{% endblock %}
+
+{% block content %}
+    {% include 'includes/header.html' %}
+
+    <div class="grid-container">
+        <nav aria-label="Nahajaš se tukaj:" role="navigation">
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'home' %}">Domov</a></li>
+                <li><span class="show-for-sr">Trenutno: </span> Vsi podcasti</li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="grid-container">
+        <h4 class="index__title">Vsi podcasti</h4>
+
+        <div class="grid-x">
+            {% if podcasts %}
+                {% regroup podcasts by name|first|upper as podcast_list %}
+                {% for podcasts in podcast_list %}
+                    <div class="small-6 medium-4 large-4 cell">
+                        <h4>{{ podcasts.grouper }}</h4>
+                        <ul>
+                            {% for podcast in podcasts.list %}
+                                <li>
+                                    <a href="{% url 'podcast' podcast_slug=podcast.slug %}">
+                                        {{ podcast.name }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <br>
+                    </div>
+                {% endfor %}
+            {% else %}
+                No Podcasts.
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

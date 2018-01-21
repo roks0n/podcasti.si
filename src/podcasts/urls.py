@@ -18,6 +18,11 @@ urlpatterns = [
         name='home'
     ),
     path(
+        'vsi-podcasti/',
+        views.AllPodcastsView.as_view(),
+        name='all-podcasts'
+    ),
+    path(
         '<slug:podcast_slug>/ep/<slug:episode_slug>/',
         views.EpisodeView.as_view(),
         name='episode'

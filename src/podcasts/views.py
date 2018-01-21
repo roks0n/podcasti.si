@@ -129,3 +129,26 @@ class PodcastView(TemplateView):
             'paginator': latest_episodes
         })
         return context
+
+
+class AllPodcastsView(TemplateView):
+    template_name = 'all-podcasts.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        podcasts = Podcast.objects.order_by('name')
+
+        context.update({
+            'seo': {
+                'title': '',  # TODO
+                'description': ''  # TODO
+            },
+            'header': {
+                'url': 'https://podcasti.si',
+                'title': 'Slovenski Podcasti',
+                'subtitle': 'Seznam vseh slovenskih podcastov'
+            },
+            'podcasts': podcasts
+        })
+        return context
