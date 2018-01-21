@@ -15,7 +15,7 @@ class Podcast(models.Model):
     created_datetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return 'Podcast "{}"'.format(self.name)
+        return self.name
 
     def __repr__(self):
         return '<Podcast "{}">'.format(self.name)
@@ -37,7 +37,7 @@ class Episode(models.Model):
     created_datetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return 'Episode "{}" from "{}"'.format(self.title, self.podcast.name)
+        return '{} from "{}"'.format(self.title, self.podcast.name)
 
     def __repr__(self):
         return '<Episode "{}" from "{}">'.format(self.title, self.podcast.name)
@@ -46,3 +46,15 @@ class Episode(models.Model):
         if not self.pk:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+
+class Stats(models.Model):
+    day = models.DateField(auto_now_add=True)
+    views = models.IntegerField(default=1)
+    episode = models.ForeignKey(Episode, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '{} from "{}"'.format(self.day, self.episode.title)
+
+    def __repr__(self):
+        return '<Stats "{}" from "{}">'.format(self.day, self.episode.title)
