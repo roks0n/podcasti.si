@@ -22,33 +22,36 @@ $(document).ready(function() {
     if (socialPhotosContainer.length === 1) {
         generateInstagramPhotoFeed();
     }
-    var player = plyr.setup()[0];
 
-    player.on('playing', function(event) {
-        var instance = event.detail.plyr;
+    var players = plyr.setup();
+    if (players != false) {
+        var player = players[0];
+        player.on('playing', function(event) {
+            var instance = event.detail.plyr;
 
-        var audio = instance.getContainer().querySelector('audio');
-        var episodeName = audio.getAttribute('data-episode');
-        var podcastName = audio.getAttribute('data-podcast');
+            var audio = instance.getContainer().querySelector('audio');
+            var episodeName = audio.getAttribute('data-episode');
+            var podcastName = audio.getAttribute('data-podcast');
 
-        gtag('event', 'play', {
-            'podcast': podcastName,
-            'episode': episodeName
+            gtag('event', 'play', {
+                'podcast': podcastName,
+                'episode': episodeName
+            });
         });
-    });
 
-    player.on('pause', function(event) {
-        var instance = event.detail.plyr;
+        player.on('pause', function(event) {
+            var instance = event.detail.plyr;
 
-        var audio = instance.getContainer().querySelector('audio');
-        var podcastName = audio.getAttribute('data-podcast');
-        var episodeName = audio.getAttribute('data-episode');
+            var audio = instance.getContainer().querySelector('audio');
+            var podcastName = audio.getAttribute('data-podcast');
+            var episodeName = audio.getAttribute('data-episode');
 
-        gtag('event', 'pause', {
-            'podcast': podcastName,
-            'episode': episodeName
+            gtag('event', 'pause', {
+                'podcast': podcastName,
+                'episode': episodeName
+            });
         });
-    });
+    }
 });
 
 function generateInstagramPhotoFeed() {
