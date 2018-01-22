@@ -21,6 +21,7 @@
                 <img src="{{ podcast.image.url }}" alt="{{ podcast.name }}" class="featured__image">
             </a>
         {% endfor %}
+        <a href="{% url 'all-podcasts' %}" class="featured__all">Seznam vseh podcastov</a>
     </div>
 
     <div class="grid-container">

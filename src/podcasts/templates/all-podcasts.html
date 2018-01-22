@@ -26,6 +26,10 @@
     <div class="grid-container">
         <h4 class="index__title">Vsi podcasti</h4>
 
+        <p>Pogrešaš na seznamu kak podcast? <a class="typeform-share link" href="https://rksn.typeform.com/to/EljGwv" data-mode="popup" style="color:#412B40;text-decoration:underline;" target="_blank">Povej nam</a> in ga bomo dodali.<script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script></p>
+
+        <br>
+
         <div class="grid-x">
             {% if podcasts %}
                 {% regroup podcasts by name|first|upper as podcast_list %}
