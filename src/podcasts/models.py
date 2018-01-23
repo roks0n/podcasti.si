@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.utils.text import slugify

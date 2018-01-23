@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from podcasts.models import Episode
 from podcasts.modules.parsers.base import (
     BitniPogovoriParser, DefaultPodcastParser, FeedBurnerParser, FilmStartParser, SoundcloudParser,
