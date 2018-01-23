@@ -46,8 +46,8 @@ class IndexView(TemplateView):
             'seo': {
                 'title': 'Slovenski Podcasti - Največji seznam slovenskih podcastov',
                 'description': (
-                    'Največji seznam slovenskih podcastov. Odkrij, spremljaj in poslušaj '
-                    'slovenske podcaste.'
+                    'Slovenski podcasti vsebuje največji seznam podcastov narejenih v Sloveniji. '
+                    'Odkrij, spremljaj in poslušaj slovenske podcaste.'
                 ),
             },
             'header': {
