@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         sync_podcasts = Podcast.objects.filter(
-            Q(last_sync=None) | Q(last_sync__gte=timezone.now() - timedelta(hours=1))
+            Q(last_sync=None) | Q(last_sync__lte=timezone.now() - timedelta(hours=1))
         )
         for podcast in sync_podcasts:
             sync_podcast(podcast)
