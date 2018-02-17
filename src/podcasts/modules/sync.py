@@ -1,25 +1,22 @@
 from podcasts.models import Episode
-from podcasts.modules.parsers.base import (
-    BitniPogovoriParser, DefaultPodcastParser, FeedBurnerParser, FilmStartParser, SoundcloudParser,
-    TandemParser, TorpedoParser, ZakulisjeParser
-)
+from podcasts.modules.parsers.base import BasePodcastParser, DefaultPodcastParser, SoundcloudParser
+
+
+def get_parser(cls, class_name):
+    for subclass in cls.__subclasses__():
+        get_parser(subclass, class_name)
+        if subclass.__name__.lower() == class_name.lower():
+            return subclass
 
 
 def sync_podcast(podcast):
-    if podcast.slug == 'zakulisje':
-        parser = ZakulisjeParser(podcast.feed_url)
-    elif podcast.slug == 'filmstart':
-        parser = FilmStartParser(podcast.feed_url)
-    elif podcast.slug in ['torpedo', 'membranje', 'fotkast', 'the-tranzistorij']:
-        parser = TorpedoParser(podcast.feed_url)
-    elif podcast.slug in ['bitni-pogovori', 'na-potezi']:
-        parser = BitniPogovoriParser(podcast.feed_url)
-    elif podcast.slug == ['bimpogovori']:
-        parser = FeedBurnerParser(podcast.feed_url)
+    class_name = f'{podcast.slug.replace("-", "")}parser'
+    parser_class = get_parser(BasePodcastParser, class_name)
+
+    if parser_class:
+        parser = parser_class(podcast.feed_url)
     elif 'feeds.soundcloud.com' in podcast.feed_url:
         parser = SoundcloudParser(podcast.feed_url)
-    elif podcast.slug == 'tandem':
-        parser = TandemParser(podcast.feed_url)
     else:
         parser = DefaultPodcastParser(podcast.feed_url)
 
