@@ -252,5 +252,5 @@ class RadioGaGaParser(DefaultPodcastParser):
 
     def parse_episode(self, episode_xml):
         if 'RadioGA-GA' in episode_xml.find('guid').text:
-            return self.parse_episode(episode_xml)
+            return super().parse_episode(episode_xml)
         return
