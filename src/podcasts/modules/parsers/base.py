@@ -7,7 +7,7 @@ from lxml import etree as ET
 import requests
 
 
-class BasePodcastParser():
+class BasePodcastParser:
     xml_data = None
     nsmap = None
 
@@ -19,7 +19,9 @@ class BasePodcastParser():
     def parse(self):
         episodes = []
         for episode in self.xml_data.findall('.//item'):
-            episodes.append(self.parse_episode(episode))
+            parsed_episode = self.parse_episode(episode)
+            if parsed_episode:
+                episodes.append(parsed_episode)
         return episodes
 
     def parse_episode(self, episode_xml):
@@ -32,19 +34,19 @@ class BasePodcastParser():
         }
         return episode
 
-    def parse_title(self):
+    def parse_title(self, episode_xml):
         raise NotImplementedError
 
-    def parse_description(self):
+    def parse_description(self, episode_xml):
         raise NotImplementedError
 
-    def parse_published_date(self):
+    def parse_published_date(self, episode_xml):
         raise NotImplementedError
 
-    def parse_audio(self):
+    def parse_audio(self, episode_xml):
         raise NotImplementedError
 
-    def parse_url(self):
+    def parse_url(self, episode_xml):
         raise NotImplementedError
 
 
@@ -127,6 +129,7 @@ class FilmStartParser(BasePodcastParser):
 
 
 class TorpedoParser(BasePodcastParser):
+
     def parse_title(self, episode_xml):
         return episode_xml.find('title', namespaces=self.nsmap).text.strip()
 
@@ -173,6 +176,18 @@ class TorpedoParser(BasePodcastParser):
         return episode_xml.find('dc:author', namespaces=self.nsmap).text.strip()
 
 
+class MembranjeParser(TorpedoParser):
+    pass
+
+
+class FotkastParser(TorpedoParser):
+    pass
+
+
+class TheTranzistorijParser(TorpedoParser):
+    pass
+
+
 class BitniPogovoriParser(DefaultPodcastParser):
 
     def parse_description(self, episode_xml):
@@ -180,6 +195,10 @@ class BitniPogovoriParser(DefaultPodcastParser):
 
     def parse_url(self, episode_xml):
         return episode_xml.find('link').text.strip()
+
+
+class NaPoteziParser(BitniPogovoriParser):
+    pass
 
 
 class FeedBurnerParser(BasePodcastParser):
@@ -201,6 +220,10 @@ class FeedBurnerParser(BasePodcastParser):
         return episode_xml.find('feedburner:origLink', namespaces=self.nsmap).text
 
 
+class BimPogovoriParser(FeedBurnerParser):
+    pass
+
+
 class SoundcloudParser(DefaultPodcastParser):
     def parse_url(self, episode_xml):
         return
@@ -213,4 +236,21 @@ class TandemParser(DefaultPodcastParser):
         return description.strip().replace('\n', '')
 
     def parse_url(self, episode_xml):
+        return
+
+
+class RadioGaGaParser(DefaultPodcastParser):
+
+    def parse_title(self, episode_xml):
+        title = episode_xml.find('title', namespaces=self.nsmap).text.strip()
+        if title.lower().replace(' ', '').replace('-', '') == 'radiogaga':
+            # add date to identify episode
+            episode_date = self.parse_published_date(episode_xml).strftime('%d.%m.%Y')
+            return f'{title} {episode_date}'
+        else:
+            return title
+
+    def parse_episode(self, episode_xml):
+        if 'RadioGA-GA' in episode_xml.find('guid').text:
+            return super().parse_episode(episode_xml)
         return
