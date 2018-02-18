@@ -8,8 +8,6 @@ from podcasts.utils.images import get_thumbnail_url
 from podcasts.utils.stats import track_episode, track_podcast
 from podcasts.utils.time import pretty_date
 
-from sorl.thumbnail import get_thumbnail
-
 
 def health(request):
     """Return a 200 status code when the service is healthy.

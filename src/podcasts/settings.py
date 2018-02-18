@@ -35,7 +35,6 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'rest_framework',
     'storages',
-    'sorl.thumbnail',
     'podcasts',
 )
 
@@ -115,8 +114,6 @@ else:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     AWS_S3_SIGNATURE_VERSION = 's3v4'
     MEDIA_ROOT = ''
-
-THUMBNAIL_FORCE_OVERWRITE = True
 
 LOGGING = {
     'version': 1,
