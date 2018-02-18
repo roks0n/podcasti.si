@@ -28,9 +28,9 @@
         <hr>
 
         <div class="grid-x grid-margin-x podcast">
-            {% if podcast.image %}
+            {% if podcast_image %}
                 <div class="shrink cell">
-                    <img src="{{ podcast.image.url }}" alt="{{ podcast.name }}" class="episode__image">
+                    <img src="{{ podcast_image }}" alt="{{ podcast.name }}" class="episode__image">
                 </div>
             {% endif %}
             <div class="auto cell podcast__content">

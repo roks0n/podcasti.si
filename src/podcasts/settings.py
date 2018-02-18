@@ -35,6 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'rest_framework',
     'storages',
+    'sorl.thumbnail',
     'podcasts',
 )
 
@@ -105,6 +106,7 @@ AWS_STORAGE_BUCKET_NAME = env.str('AWS_STORAGE_BUCKET_NAME', default=None)
 AWS_S3_REGION_NAME = env.str('AWS_REGION', default=None)
 AWS_ACCESS_KEY_ID = env.str('AWS_ACCESS_KEY_ID', default=None)
 AWS_SECRET_ACCESS_KEY = env.str('AWS_SECRET_ACCESS_KEY', default=None)
+AWS_QUERYSTRING_AUTH = False
 MEDIA_URL = env.str('MEDIA_URL', default='/media/')
 if DEBUG:
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
@@ -113,6 +115,8 @@ else:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     AWS_S3_SIGNATURE_VERSION = 's3v4'
     MEDIA_ROOT = ''
+
+THUMBNAIL_FORCE_OVERWRITE = True
 
 LOGGING = {
     'version': 1,

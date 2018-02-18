@@ -4,8 +4,11 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
 from podcasts.models import Episode, Podcast
+from podcasts.utils.images import get_thumbnail_url
 from podcasts.utils.stats import track_episode, track_podcast
 from podcasts.utils.time import pretty_date
+
+from sorl.thumbnail import get_thumbnail
 
 
 def health(request):
@@ -21,21 +24,28 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        episodes = []
-
         page = self.request.GET.get('page')
+
+        featured_podcasts = []
+        featured = Podcast.objects.order_by('?')[:8]
+        for podcast in featured:
+            featured_podcasts.append({
+                'slug': podcast.slug,
+                'image': get_thumbnail_url(podcast.image, '130x130'),
+                'name': podcast.name
+            })
 
         latest_episodes = Episode.objects.order_by('-published_datetime')
         paginator = Paginator(latest_episodes, 30)
         latest_episodes = paginator.get_page(page)
 
+        episodes = []
         for episode in latest_episodes:
             episodes.append({
                 'title': episode.title,
                 'podcast_name': episode.podcast.name,
                 'published': pretty_date(episode.published_datetime),
-                'image': episode.podcast.image.url,
+                'image': get_thumbnail_url(episode.podcast.image, '130x130'),
                 'slug': episode.slug,
                 'podcast_slug': episode.podcast.slug,
                 'external_url': episode.url,
@@ -56,7 +66,7 @@ class IndexView(TemplateView):
             },
             'latest_episodes': episodes,
             'paginator': latest_episodes,
-            'featured_podcasts': Podcast.objects.order_by('?')[:8]
+            'featured_podcasts': featured_podcasts
         })
         return context
 
@@ -124,6 +134,7 @@ class PodcastView(TemplateView):
                 'subtitle': 'Seznam vseh slovenskih podcastov'
             },
             'podcast': podcast,
+            'podcast_image': get_thumbnail_url(podcast.image, '130x130'),
             'episodes': episodes,
             'paginator': latest_episodes
         })
