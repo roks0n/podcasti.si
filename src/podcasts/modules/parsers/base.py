@@ -86,7 +86,7 @@ class ZakulisjeParser(BasePodcastParser):
         return episode_xml.find('title', namespaces=self.nsmap).text.strip()
 
     def parse_description(self, episode_xml):
-        return ''
+        return episode_xml.find('description', namespaces=self.nsmap).text.strip().replace('\n', '')
 
     def parse_published_datetime(self, episode_xml):
         datetime_string = episode_xml.find('pubDate', namespaces=self.nsmap).text.strip()
