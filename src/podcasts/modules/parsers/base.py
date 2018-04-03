@@ -90,7 +90,7 @@ class ZakulisjeParser(BasePodcastParser):
         return datetime.strptime(datetime_string, '%a, %d %b %Y %H:%M:%S %z')
 
     def parse_audio(self, episode_xml):
-        html_string = episode_xml.find('content:encoded', namespaces=self.nsmap).text.strip()
+        html_string = episode_xml.find('description', namespaces=self.nsmap).text.strip()
         dom = ET.HTML(html_string)
         for link in dom.findall('.//a'):
             href = link.attrib.get('href')

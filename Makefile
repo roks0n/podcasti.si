@@ -38,15 +38,11 @@ bash: ## Start a bash shell in the container environment
 
 .PHONY: shell
 shell: ## Start a Python shell in the container environment
-	docker-compose run --rm $(NAME) django-admin shell
+	docker-compose run --service-ports --rm $(NAME) django-admin shell
 
 .PHONY: dbshell
 dbshell: ## Start a database shell in the container environment
 	docker-compose run --rm $(NAME) django-admin dbshell
-
-.PHONY: data-shell
-data-shell: ## Start a database shell in the container environment
-	docker-compose run --rm $(NAME) django-admin data-shell
 
 .PHONY: migrations
 migrations: ## Generate database migration scripts
