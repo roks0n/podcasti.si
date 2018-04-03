@@ -6,10 +6,13 @@ from lxml import etree as ET
 
 import requests
 
+from podcasts.models import Episode
+
 
 class BasePodcastParser:
     xml_data = None
     nsmap = None
+    episode_identifier = Episode.title.field_name
 
     def __init__(self, podcast_feed, *args, **kwargs):
         response = requests.get(podcast_feed)
@@ -28,7 +31,7 @@ class BasePodcastParser:
         episode = {
             'title': self.parse_title(episode_xml),
             'description': self.parse_description(episode_xml),
-            'published_datetime': self.parse_published_date(episode_xml),
+            'published_datetime': self.parse_published_datetime(episode_xml),
             'audio': self.parse_audio(episode_xml),
             'url': self.parse_url(episode_xml),
         }
@@ -40,7 +43,7 @@ class BasePodcastParser:
     def parse_description(self, episode_xml):
         raise NotImplementedError
 
-    def parse_published_date(self, episode_xml):
+    def parse_published_datetime(self, episode_xml):
         raise NotImplementedError
 
     def parse_audio(self, episode_xml):
@@ -58,7 +61,7 @@ class DefaultPodcastParser(BasePodcastParser):
     def parse_description(self, episode_xml):
         return episode_xml.find('description', namespaces=self.nsmap).text
 
-    def parse_published_date(self, episode_xml):
+    def parse_published_datetime(self, episode_xml):
         datetime_string = episode_xml.find('pubDate', namespaces=self.nsmap).text.strip()
         return datetime.strptime(datetime_string, '%a, %d %b %Y %H:%M:%S %z')
 
@@ -85,7 +88,7 @@ class ZakulisjeParser(BasePodcastParser):
     def parse_description(self, episode_xml):
         return episode_xml.find('description', namespaces=self.nsmap).text.strip().replace('\n', '')
 
-    def parse_published_date(self, episode_xml):
+    def parse_published_datetime(self, episode_xml):
         datetime_string = episode_xml.find('pubDate', namespaces=self.nsmap).text.strip()
         return datetime.strptime(datetime_string, '%a, %d %b %Y %H:%M:%S %z')
 
@@ -112,7 +115,7 @@ class FilmStartParser(BasePodcastParser):
         description = dom.findall('.//p')[0].text.replace('[…]', '...')
         return description
 
-    def parse_published_date(self, episode_xml):
+    def parse_published_datetime(self, episode_xml):
         datetime_string = episode_xml.find('pubDate', namespaces=self.nsmap).text.strip()
         return datetime.strptime(datetime_string, '%a, %d %b %Y %H:%M:%S %z')
 
@@ -157,7 +160,7 @@ class TorpedoParser(BasePodcastParser):
         stringify = ' '.join(good_paragraphs)
         return ' '.join(stringify.split())
 
-    def parse_published_date(self, episode_xml):
+    def parse_published_datetime(self, episode_xml):
         datetime_string = episode_xml.find('pubDate', namespaces=self.nsmap).text.strip()
         return datetime.strptime(datetime_string, '%a, %d %b %Y %H:%M:%S %z')
 
@@ -209,7 +212,7 @@ class FeedBurnerParser(BasePodcastParser):
     def parse_description(self, episode_xml):
         return episode_xml.find('itunes:summary', namespaces=self.nsmap).text.strip()
 
-    def parse_published_date(self, episode_xml):
+    def parse_published_datetime(self, episode_xml):
         datetime_string = episode_xml.find('pubDate', namespaces=self.nsmap).text.strip()
         return datetime.strptime(datetime_string, '%a, %d %b %Y %H:%M:%S %z')
 
@@ -241,11 +244,13 @@ class TandemParser(DefaultPodcastParser):
 
 class RadioGaGaParser(DefaultPodcastParser):
 
+    episode_identifier = Episode.audio.field_name
+
     def parse_title(self, episode_xml):
         title = episode_xml.find('title', namespaces=self.nsmap).text.strip()
         if title.lower().replace(' ', '').replace('-', '') == 'radiogaga':
             # add date to identify episode
-            episode_date = self.parse_published_date(episode_xml).strftime('%d.%m.%Y')
+            episode_date = self.parse_published_datetime(episode_xml).strftime('%d.%m.%Y')
             return f'{title} {episode_date}'
         else:
             return title
