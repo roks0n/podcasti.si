@@ -29,7 +29,9 @@ def sync_podcast(podcast):
         parser = DefaultPodcastParser(podcast.feed_url)
 
     episodes = parser.parse()
+    ident_name = parser.episode_identifier
+
     for episode in episodes:
-        if not Episode.objects.filter(title=episode['title'], podcast=podcast).exists():
+        if not Episode.objects.filter(**{ident_name: episode[ident_name], 'podcast': podcast}).exists():
             episode.update({'podcast': podcast})
             Episode.objects.create(**episode)
