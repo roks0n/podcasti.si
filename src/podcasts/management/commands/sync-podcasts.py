@@ -17,7 +17,7 @@ class Command(BaseCommand):
             Q(last_sync=None) | Q(last_sync__lte=timezone.now() - timedelta(hours=1))
         )
         for podcast in sync_podcasts:
-            sys.stdout.write('Syncing podcast {}'.format(podcast.name))
+            sys.stdout.write('Syncing podcast {}\n'.format(podcast.name))
             sync_podcast(podcast)
             podcast.last_sync = timezone.now()
             podcast.save()
