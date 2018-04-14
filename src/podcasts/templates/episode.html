@@ -67,18 +67,22 @@
             <div class="large-4 cell">
                 <ul>
                     <li><i class="fas fa-calendar-alt"></i> <b>Objavljeno</b>: {{ episode.published_datetime | date:'d.m.Y H:i' }}</li>
-                    <li><i class="fas fa-columns"></i> <b>WWW</b>:
-                        <ul>
-                            {% if episode.url %}
-                                <li>
-                                    <a href="{{ episode.url }}" target="_blank">Stran epizode</a>
-                                </li>
-                            {% endif %}
-                            <li>
-                                <a href="{{ episode.podcast.website }}" target="_blank">Domača stran</a>
-                            </li>
-                        </ul>
-                    </li>
+                    {% if episode.url or episode.podcast.website %}
+                        <li><i class="fas fa-columns"></i> <b>WWW</b>:
+                            <ul>
+                                {% if episode.url %}
+                                    <li>
+                                        <a href="{{ episode.url }}" target="_blank">Stran epizode</a>
+                                    </li>
+                                {% endif %}
+                                {% if episode.podcast.website %}
+                                    <li>
+                                        <a href="{{ episode.podcast.website }}" target="_blank">Domača stran</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    {% endif %}
                     <li><i class="fas fa-users"></i> <b>Avtor</b>: {{ episode.podcast.authors }}</li>
                 </ul>
             </div>

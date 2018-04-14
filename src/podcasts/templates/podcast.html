@@ -41,10 +41,12 @@
         </div>
 
         <p>{{ podcast.description }}</p>
-        <p>
-            <i class="fas fa-columns"></i> <b>WWW</b>:
-            <a href="{{ podcast.website }}" target="_blank">{{ podcast.website }}</a>
-        </p>
+        {% if podcast.website %}
+            <p>
+                <i class="fas fa-columns"></i> <b>WWW</b>:
+                <a href="{{ podcast.website }}" target="_blank">{{ podcast.website }}</a>
+            </p>
+        {% endif %}
 
         <br>
 
