@@ -8,6 +8,9 @@ from django.utils import timezone
 
 from podcasts.models import Podcast
 from podcasts.modules.sync import sync_podcast
+from podcasts.utils.logger import get_log
+
+log = get_log(__name__)
 
 
 class Command(BaseCommand):
@@ -18,6 +21,10 @@ class Command(BaseCommand):
         )
         for podcast in sync_podcasts:
             sys.stdout.write('Syncing podcast {}\n'.format(podcast.name))
-            sync_podcast(podcast)
-            podcast.last_sync = timezone.now()
-            podcast.save()
+            try:
+                sync_podcast(podcast)
+            except Exception:
+                log.exception('Error syncing podcast %s', podcast.name)
+            else:
+                podcast.last_sync = timezone.now()
+                podcast.save()
