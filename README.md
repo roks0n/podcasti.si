@@ -11,8 +11,8 @@ Obstaja tudi [public todo lista](https://trello.com/b/uiI85sUB/podcastisi). Ce t
 V primeru da manjka podcast, ga je potrebno rocno vnesti. Lahko odpres Issue ali pa me dregnes na @roks0n.
 
 ### 💡 Ideas
-Imas idejo, jo lahko dodas na [Trello](https://trello.com/b/uiI85sUB/podcastisi). 
-Spudbujamo tudi glasovanje na ideje, kar bo olajsalo prioritizacijo taskov.
+Ce imas idejo jo lahko dodas na [Trello](https://trello.com/b/uiI85sUB/podcastisi). 
+Spudbujamo tudi **glasovanje na ideje**, kar bo olajsalo prioritizacijo taskov.
 
 #### Navodila za kreiranje ticketa
 1. Prijavi se v Trello (v kolikor se nisi, se moras registrirati)
