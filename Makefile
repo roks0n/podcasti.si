@@ -60,6 +60,10 @@ collectstatic:
 superuser:
 	docker-compose run --rm $(NAME) django-admin createsuperuser
 
+.PHONY: sync-podcasts
+sync-podcasts:
+	docker-compose run --rm $(NAME) django-admin sync-podcasts
+
 .PHONY: lint-diff
 lint-diff: ## Check code for quality and standards on changed files only
 	git diff upstream/master src tests | flake8 --select=E,F,I,W --diff
