@@ -31,12 +31,16 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'django.contrib.sitemaps',
     'rest_framework',
     'storages',
     'podcasts',
 )
+
+if not DEBUG:
+    INSTALLED_APPS += (
+        'django.contrib.sites',
+        'django.contrib.sitemaps',
+    )
 
 REST_FRAMEWORK = {
     # Use only JSON by default
