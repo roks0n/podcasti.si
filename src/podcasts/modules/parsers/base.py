@@ -204,6 +204,10 @@ class NaPoteziParser(BitniPogovoriParser):
     pass
 
 
+class ParallelPassionParser(BitniPogovoriParser):
+    pass
+
+
 class FeedBurnerParser(BasePodcastParser):
 
     def parse_title(self, episode_xml):
