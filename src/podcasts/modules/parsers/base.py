@@ -86,17 +86,18 @@ class ZakulisjeParser(BasePodcastParser):
         return episode_xml.find('title', namespaces=self.nsmap).text.strip()
 
     def parse_description(self, episode_xml):
-        description = episode_xml.find('description', namespaces=self.nsmap).text
-        if description:
-            return description.strip().replace('\n', '')
+        return ''
 
     def parse_published_datetime(self, episode_xml):
         datetime_string = episode_xml.find('pubDate', namespaces=self.nsmap).text.strip()
         return datetime.strptime(datetime_string, '%a, %d %b %Y %H:%M:%S %z')
 
     def parse_audio(self, episode_xml):
-        html_string = episode_xml.find('description', namespaces=self.nsmap).text.strip()
-        dom = ET.HTML(html_string)
+        html_string = episode_xml.find('description', namespaces=self.nsmap).text
+        if not html_string:
+            return ''
+
+        dom = ET.HTML(html_string.strip())
         for link in dom.findall('.//a'):
             href = link.attrib.get('href')
             if href and href.endswith('.mp3'):

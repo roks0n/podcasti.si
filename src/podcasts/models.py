@@ -13,6 +13,7 @@ class Podcast(models.Model):
     feed_url = models.URLField(max_length=256)
     last_sync = models.DateTimeField(blank=True, null=True)
     created_datetime = models.DateTimeField(auto_now_add=True)
+    disabled = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

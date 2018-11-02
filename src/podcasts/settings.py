@@ -4,9 +4,16 @@ Django settings for podcasts project.
 
 import environ
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 root = environ.Path(__file__) - 3
 env = environ.Env()
+
+sentry_sdk.init(
+    dsn=env.str('SENTRY_DSN', default=''),
+    integrations=[DjangoIntegration()]
+)
 
 DEBUG = env.bool('DEBUG', default=False)
 
