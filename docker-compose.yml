@@ -13,6 +13,7 @@ services:
     environment:
       DEBUG: '1'
       PORT: '8000'
+      SENTRY_DSN: ''
       DATABASE_URL: 'postgres://postgres:postgres@db:5432/postgres'
   db:
     image: postgres:9.6

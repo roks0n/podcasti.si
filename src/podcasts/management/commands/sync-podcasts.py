@@ -17,14 +17,16 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         sync_podcasts = Podcast.objects.filter(
-            Q(last_sync=None) | Q(last_sync__lte=timezone.now() - timedelta(hours=1))
+            Q(last_sync=None) | Q(last_sync__lte=timezone.now() - timedelta(hours=1)),
+            disabled=False
         )
         for podcast in sync_podcasts:
             sys.stdout.write('Syncing podcast {}\n'.format(podcast.name))
             try:
                 sync_podcast(podcast)
             except Exception:
-                log.exception('Error syncing podcast %s', podcast.name)
+                log.exception('Error syncing podcast %s. Marking it as disabled.', podcast.name)
+                podcast.disabled = True
             else:
                 podcast.last_sync = timezone.now()
-                podcast.save()
+            podcast.save()
