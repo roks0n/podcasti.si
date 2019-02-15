@@ -1,8 +1,11 @@
+from django.conf import settings
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
+from rest_framework import viewsets, routers
 
+from podcasts import serializers
 from podcasts.models import Episode, Podcast
 from podcasts.utils.images import get_thumbnail_url
 from podcasts.utils.stats import track_episode, track_podcast
@@ -29,12 +32,12 @@ class IndexView(TemplateView):
         for podcast in featured:
             featured_podcasts.append({
                 'slug': podcast.slug,
-                'image': get_thumbnail_url(podcast.image, '130x130'),
+                'image': get_thumbnail_url(podcast.image),
                 'name': podcast.name
             })
 
         latest_episodes = Episode.objects.order_by('-published_datetime')
-        paginator = Paginator(latest_episodes, 30)
+        paginator = Paginator(latest_episodes, settings.PAGE_SIZE)
         latest_episodes = paginator.get_page(page)
 
         episodes = []
@@ -43,7 +46,7 @@ class IndexView(TemplateView):
                 'title': episode.title,
                 'podcast_name': episode.podcast.name,
                 'published': pretty_date(episode.published_datetime),
-                'image': get_thumbnail_url(episode.podcast.image, '130x130'),
+                'image': get_thumbnail_url(episode.podcast.image),
                 'slug': episode.slug,
                 'podcast_slug': episode.podcast.slug,
                 'external_url': episode.url,
@@ -107,7 +110,7 @@ class PodcastView(TemplateView):
         page = self.request.GET.get('page')
 
         latest_episodes = podcast.episode_set.order_by('-published_datetime')
-        paginator = Paginator(latest_episodes, 30)
+        paginator = Paginator(latest_episodes, settings.PAGE_SIZE)
         latest_episodes = paginator.get_page(page)
 
         episodes = []
@@ -132,7 +135,7 @@ class PodcastView(TemplateView):
                 'subtitle': 'Seznam vseh slovenskih podcastov'
             },
             'podcast': podcast,
-            'podcast_image': get_thumbnail_url(podcast.image, '130x130'),
+            'podcast_image': get_thumbnail_url(podcast.image),
             'episodes': episodes,
             'paginator': latest_episodes
         })
@@ -160,3 +163,27 @@ class AllPodcastsView(TemplateView):
             'podcasts': podcasts
         })
         return context
+
+
+class ApiEpisodes(viewsets.ReadOnlyModelViewSet):
+    lookup_field = 'slug'
+    queryset = Episode.objects.order_by('-published_datetime')
+    serializer_class = serializers.EpisodeSerializer
+
+
+class ApiPodcasts(viewsets.ReadOnlyModelViewSet):
+    lookup_field = 'slug'
+    queryset = Podcast.objects.order_by('name')
+    serializer_class = serializers.PodcastSerializer
+
+
+class ApiFeed(viewsets.ReadOnlyModelViewSet):
+    lookup_field = 'slug'
+    queryset = Episode.objects.prefetch_related('podcast').order_by('-published_datetime')
+    serializer_class = serializers.FeedSerializer
+
+
+router = routers.DefaultRouter()
+router.register(r'episodes', ApiEpisodes, 'episode')
+router.register(r'podcasts', ApiPodcasts, 'podcast')
+router.register(r'feed', ApiFeed, 'feed')

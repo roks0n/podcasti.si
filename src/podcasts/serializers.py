@@ -22,7 +22,7 @@ class PodcastSerializer(serializers.ModelSerializer):
 
 
 class FeedSerializer(serializers.ModelSerializer):
-    _url = serializers.HyperlinkedIdentityField(view_name='episode-detail', lookup_field='slug', read_only=True)
+    _url = serializers.HyperlinkedIdentityField(view_name='feed-detail', lookup_field='slug', read_only=True)
     podcast = PodcastSerializer()
 
     class Meta:
