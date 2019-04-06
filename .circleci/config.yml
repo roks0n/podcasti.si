@@ -24,7 +24,4 @@ workflows:
   version: 2
   build-master:
     jobs:
-      - test:
-          filters:
-            branches:
-              only: master
+      - test
