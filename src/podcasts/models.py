@@ -20,7 +20,7 @@ class Podcast(models.Model):
         return self.name
 
     def __repr__(self):
-        return '<Podcast "{}">'.format(self.name)
+        return f'<Podcast "{self.name}" by "{self.authors}">
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -40,10 +40,10 @@ class Episode(models.Model):
     created_datetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '{} from "{}"'.format(self.title, self.podcast.name)
+        return f'{self.title} from "{self.podcast.name}"'
 
     def __repr__(self):
-        return '<Episode "{}" from "{}">'.format(self.title, self.podcast.name)
+        return f'<Episode "{self.title}" from "{self.podcast.name}">'
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -57,7 +57,7 @@ class Stats(models.Model):
     payload = JSONField(default=dict)
 
     def __str__(self):
-        return '{} on "{}"'.format(self.payload["type"], self.day)
+        return f'{self.payload["type"]} on "{self.day}"'
 
     def __repr__(self):
-        return '<Stats "{}" on "{}">'.format(self.payload["type"], self.day)
+        return f'<Stats "{self.payload["type"]}" on "{self.day}">'
