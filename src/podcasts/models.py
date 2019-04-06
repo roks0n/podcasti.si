@@ -18,7 +18,7 @@ class Podcast(models.Model):
     meta_description = models.CharField(max_length=300, null=True)
 
     def __str__(self):
-        return f'{self.name} by {self.authors}'
+        return f"{self.name} by {self.authors}"
 
     def __repr__(self):
         return f'<Podcast "{self.name}" by "{self.authors}">'

@@ -106,6 +106,9 @@ STATIC_ROOT = root("static")
 STATICFILES_DIRS = (root("static-source/"),)
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+if DEBUG:
+    WHITENOISE_AUTOREFRESH = True
+
 # S3 settings for uploaded files
 AWS_STORAGE_BUCKET_NAME = env.str("AWS_STORAGE_BUCKET_NAME", default=None)
 AWS_S3_REGION_NAME = env.str("AWS_REGION", default=None)
