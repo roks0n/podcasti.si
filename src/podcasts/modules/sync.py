@@ -1,5 +1,5 @@
 from podcasts.models import Episode
-from podcasts.modules.parsers.base import BasePodcastParser, DefaultPodcastParser, SoundcloudParser
+from podcasts.modules.parsers.base import BasePodcastParser, DefaultPodcastParser
 
 
 def get_parser(base_class, class_name):
@@ -23,8 +23,6 @@ def sync_podcast(podcast):
 
     if parser_class:
         parser = parser_class(podcast.feed_url)
-    elif 'feeds.soundcloud.com' in podcast.feed_url:
-        parser = SoundcloudParser(podcast.feed_url)
     else:
         parser = DefaultPodcastParser(podcast.feed_url)
 

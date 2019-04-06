@@ -2,6 +2,9 @@ from django.utils import timezone
 
 
 def pretty_date(datetime):
+    if not datetime:
+        return 'neznano'
+
     output = None
     now = timezone.now()
     diff = now - datetime

@@ -4,16 +4,14 @@ Django settings for podcasts project.
 
 import environ
 
+import logging
+
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
 
 root = environ.Path(__file__) - 3
 env = environ.Env()
-
-sentry_sdk.init(
-    dsn=env.str('SENTRY_DSN', default=''),
-    integrations=[DjangoIntegration()]
-)
 
 DEBUG = env.bool('DEBUG', default=False)
 
@@ -31,7 +29,14 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 SECRET_KEY = env.str('SECRET_KEY', default='please-dont-use-me-in-production')
 
 # Application definition
-INSTALLED_APPS = (
+if DEBUG:
+    INSTALLED_APPS = (
+        'whitenoise.runserver_nostatic',
+    )
+else:
+    INSTALLED_APPS = ()
+
+INSTALLED_APPS += (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -61,6 +66,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -94,11 +100,11 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+USE_I18N = False
 
-USE_L10N = True
+USE_L10N = False
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
@@ -109,7 +115,7 @@ STATIC_ROOT = root('static')
 STATICFILES_DIRS = (
     root('static-source/'),
 )
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # S3 settings for uploaded files
 AWS_STORAGE_BUCKET_NAME = env.str('AWS_STORAGE_BUCKET_NAME', default=None)
@@ -169,3 +175,13 @@ LOGGING = {
         }
     }
 }
+
+sentry_logging = LoggingIntegration(
+    level=logging.INFO,        # Capture info and above as breadcrumbs
+    event_level=logging.ERROR  # Send errors as events
+)
+
+sentry_sdk.init(
+    dsn=env.str('SENTRY_DSN', default=''),
+    integrations=[sentry_logging, DjangoIntegration()]
+)

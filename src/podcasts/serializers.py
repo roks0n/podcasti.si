@@ -4,7 +4,9 @@ from podcasts import models
 
 
 class EpisodeSerializer(serializers.ModelSerializer):
-    _url = serializers.HyperlinkedIdentityField(view_name='episode-detail', lookup_field='slug', read_only=True)
+    _url = serializers.HyperlinkedIdentityField(
+        view_name='episode-detail', lookup_field='slug', read_only=True
+    )
 
     class Meta:
         model = models.Episode
@@ -13,7 +15,9 @@ class EpisodeSerializer(serializers.ModelSerializer):
 
 
 class PodcastSerializer(serializers.ModelSerializer):
-    _url = serializers.HyperlinkedIdentityField(view_name='podcast-detail', lookup_field='slug', read_only=True)
+    _url = serializers.HyperlinkedIdentityField(
+        view_name='podcast-detail', lookup_field='slug', read_only=True
+    )
 
     class Meta:
         model = models.Podcast
@@ -22,7 +26,9 @@ class PodcastSerializer(serializers.ModelSerializer):
 
 
 class FeedSerializer(serializers.ModelSerializer):
-    _url = serializers.HyperlinkedIdentityField(view_name='feed-detail', lookup_field='slug', read_only=True)
+    _url = serializers.HyperlinkedIdentityField(
+        view_name='feed-detail', lookup_field='slug', read_only=True
+    )
     podcast = PodcastSerializer()
 
     class Meta:

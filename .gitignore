@@ -15,3 +15,4 @@ static/
 pip-compile_output.txt
 requirements.txt.bak
 !.dockerignore
+*.sql.gz

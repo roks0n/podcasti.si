@@ -35,8 +35,7 @@ class IndexView(TemplateView):
                 'image': get_thumbnail_url(podcast.image),
                 'name': podcast.name
             })
-
-        latest_episodes = Episode.objects.order_by('-published_datetime')
+        latest_episodes = Episode.objects.order_by('-published_datetime', '-created_datetime')
         paginator = Paginator(latest_episodes, settings.PAGE_SIZE)
         latest_episodes = paginator.get_page(page)
 
@@ -109,7 +108,7 @@ class PodcastView(TemplateView):
 
         page = self.request.GET.get('page')
 
-        latest_episodes = podcast.episode_set.order_by('-published_datetime')
+        latest_episodes = podcast.episode_set.order_by('-published_datetime', '-created_datetime')
         paginator = Paginator(latest_episodes, settings.PAGE_SIZE)
         latest_episodes = paginator.get_page(page)
 
@@ -167,7 +166,7 @@ class AllPodcastsView(TemplateView):
 
 class ApiEpisodes(viewsets.ReadOnlyModelViewSet):
     lookup_field = 'slug'
-    queryset = Episode.objects.order_by('-published_datetime')
+    queryset = Episode.objects.order_by('-published_datetime', '-created_datetime')
     serializer_class = serializers.EpisodeSerializer
 
 
@@ -179,7 +178,9 @@ class ApiPodcasts(viewsets.ReadOnlyModelViewSet):
 
 class ApiFeed(viewsets.ReadOnlyModelViewSet):
     lookup_field = 'slug'
-    queryset = Episode.objects.prefetch_related('podcast').order_by('-published_datetime')
+    queryset = Episode.objects.prefetch_related('podcast').order_by(
+        '-published_datetime', '-created_datetime'
+    )
     serializer_class = serializers.FeedSerializer
 
 
