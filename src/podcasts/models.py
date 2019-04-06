@@ -17,7 +17,7 @@ class Podcast(models.Model):
     is_radio = models.NullBooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} by {self.authors}'
 
     def __repr__(self):
         return f'<Podcast "{self.name}" by "{self.authors}">'
