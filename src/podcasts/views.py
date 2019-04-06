@@ -50,6 +50,7 @@ class IndexView(TemplateView):
                 {
                     "title": episode.title,
                     "podcast_name": episode.podcast.name,
+                    "is_radio": episode.podcast.is_radio,
                     "published": pretty_date(episode.published_datetime),
                     "image": get_thumbnail_url(episode.podcast.image),
                     "slug": episode.slug,

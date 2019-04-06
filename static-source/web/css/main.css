@@ -1,5 +1,7 @@
 hr {
     width: 100%;
+    margin: 0.5em auto;
+    border-bottom: 1px solid #e6e6e6;
 }
 
 .header {
@@ -45,14 +47,14 @@ hr {
 
 .episode {
     width: 100%;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 }
 .episode__content {
     align-content: space-evenly;
     display: grid;
 }
 .episode__title {
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 500;
     margin: 0;
 }
@@ -132,4 +134,8 @@ hr {
     display: block;
     margin-top: 0.5em;
     font-size: 1em;
+}
+
+.subtle-icon {
+    color: #dcdcdc;
 }
