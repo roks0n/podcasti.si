@@ -21,7 +21,7 @@ jobs:
           command: black --check .
       - run:
           name: Run tests
-          command: py.test -vv -s -x
+          command: py.test -vv -s
 
 workflows:
   version: 2
