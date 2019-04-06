@@ -84,3 +84,18 @@ docker-clean-images: ## Remove all docker images
 
 .PHONY: docker-clean
 docker-clean: docker-clean-containers docker-clean-images
+
+pip-compile:
+	docker-compose run podcasts pip-compile requirements.in
+
+pip-upgrade:
+	docker-compose run podcasts pip-compile --upgrade requirements.in
+
+lint:
+	docker-compose run podcasts flake8 .
+
+black:
+	docker-compose run podcasts black .
+
+black-check:
+	docker-compose run podcasts black --check .

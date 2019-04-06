@@ -1,5 +1,4 @@
 import sys
-
 from datetime import timedelta
 
 from django.core.management.base import BaseCommand
@@ -14,18 +13,17 @@ log = get_log(__name__)
 
 
 class Command(BaseCommand):
-
     def handle(self, *args, **options):
         sync_podcasts = Podcast.objects.filter(
             Q(last_sync=None) | Q(last_sync__lte=timezone.now() - timedelta(hours=1)),
-            disabled=False
+            disabled=False,
         )
         for podcast in sync_podcasts:
-            sys.stdout.write('Syncing podcast {}\n'.format(podcast.name))
+            sys.stdout.write("Syncing podcast {}\n".format(podcast.name))
             try:
                 sync_podcast(podcast)
             except Exception:
-                log.exception('Error syncing podcast %s. Marking it as disabled.', podcast.name)
+                log.exception("Error syncing podcast %s. Marking it as disabled.", podcast.name)
                 podcast.disabled = True
             else:
                 podcast.last_sync = timezone.now()
