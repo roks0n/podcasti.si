@@ -17,6 +17,9 @@ jobs:
           name: Run linting
           command: flake8 .
       - run:
+          name: Run black
+          command: black --check .
+      - run:
           name: Run tests
           command: py.test -vv -s -x
 
