@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  tests:
+  test:
     working_directory: ~/podcasts
     environment:
       IMAGE_NAME: podcasts
