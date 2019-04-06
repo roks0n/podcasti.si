@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.postgres.fields import JSONField
+from django.db import models
 from django.utils.text import slugify
 
 
@@ -14,7 +14,7 @@ class Podcast(models.Model):
     last_sync = models.DateTimeField(blank=True, null=True)
     created_datetime = models.DateTimeField(auto_now_add=True)
     disabled = models.BooleanField(default=False)
-    is_radio = models.BooleanField(default=False)
+    is_radio = models.NullBooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -57,7 +57,7 @@ class Stats(models.Model):
     payload = JSONField(default=dict)
 
     def __str__(self):
-        return '{} on "{}"'.format(self.payload['type'], self.day)
+        return '{} on "{}"'.format(self.payload["type"], self.day)
 
     def __repr__(self):
-        return '<Stats "{}" on "{}">'.format(self.payload['type'], self.day)
+        return '<Stats "{}" on "{}">'.format(self.payload["type"], self.day)

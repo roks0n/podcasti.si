@@ -3,7 +3,6 @@ from podcasts.modules.parsers.base import BasePodcastParser, DefaultPodcastParse
 
 
 def get_parser(base_class, class_name):
-
     def all_parser_classes(cls):
         for subclass in cls.__subclasses__():
             yield from all_parser_classes(subclass)
@@ -11,9 +10,11 @@ def get_parser(base_class, class_name):
 
     return next(
         (
-            cls for cls in all_parser_classes(base_class)
+            cls
+            for cls in all_parser_classes(base_class)
             if cls.__name__.lower() == class_name.lower()
-        ), None
+        ),
+        None,
     )
 
 
@@ -31,7 +32,7 @@ def sync_podcast(podcast):
 
     for episode in episodes:
         if not Episode.objects.filter(
-            **{ident_name: episode[ident_name], 'podcast': podcast}
+            **{ident_name: episode[ident_name], "podcast": podcast}
         ).exists():
-            episode.update({'podcast': podcast})
+            episode.update({"podcast": podcast})
             Episode.objects.create(**episode)
