@@ -20,7 +20,7 @@ class Podcast(models.Model):
         return self.name
 
     def __repr__(self):
-        return f'<Podcast "{self.name}" by "{self.authors}">
+        return f'<Podcast "{self.name}" by "{self.authors}">'
 
     def save(self, *args, **kwargs):
         if not self.pk:
