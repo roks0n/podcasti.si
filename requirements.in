@@ -14,6 +14,8 @@ lxml==4.3.3
 Pillow==6.0.0
 psycopg2-binary==2.7.5
 pytz
+pytest
+pytest-django
 requests
 responses
 uwsgi==2.0.18

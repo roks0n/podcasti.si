@@ -10,7 +10,7 @@ from podcasts import sitemaps, views
 urlpatterns = (
     [
         path("admin/", admin.site.urls),
-        path("health/", views.health),
+        path("health/", views.health, name="health"),
         path("", views.IndexView.as_view(), name="home"),
         path("vsi-podcasti/", views.AllPodcastsView.as_view(), name="all-podcasts"),
         path(
