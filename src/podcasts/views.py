@@ -38,7 +38,9 @@ class IndexView(TemplateView):
                     "name": podcast.name,
                 }
             )
-        latest_episodes = Episode.objects.order_by("-published_datetime", "-created_datetime")
+        latest_episodes = Episode.objects.exclude(
+            published_datetime=None
+        ).order_by("-published_datetime")
         paginator = Paginator(latest_episodes, settings.PAGE_SIZE)
         latest_episodes = paginator.get_page(page)
 
