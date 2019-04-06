@@ -1,10 +1,12 @@
 version: 2
 
 jobs:
-  tests:
-    working_directory: ~/podcasts
+  test:
+    working_directory: ~/code
     environment:
       IMAGE_NAME: podcasts
+      DJANGO_SETTINGS_MODULE: podcasts.settings
+      PYTHONPATH: /home/circleci/code/src
     docker:
       - image: circleci/python:3.7-stretch
       - image: circleci/postgres:9.6.9
@@ -17,14 +19,14 @@ jobs:
           name: Run linting
           command: flake8 .
       - run:
+          name: Run black
+          command: black --check .
+      - run:
           name: Run tests
-          command: py.test -vv -s -x
+          command: py.test -vv -s
 
 workflows:
   version: 2
   build-master:
     jobs:
-      - test:
-          filters:
-            branches:
-              only: master
+      - test
