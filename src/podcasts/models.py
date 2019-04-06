@@ -15,6 +15,7 @@ class Podcast(models.Model):
     created_datetime = models.DateTimeField(auto_now_add=True)
     disabled = models.BooleanField(default=False)
     is_radio = models.NullBooleanField(default=False)
+    meta_description = models.CharField(max_length=300, null=True)
 
     def __str__(self):
         return f'{self.name} by {self.authors}'

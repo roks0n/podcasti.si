@@ -21,8 +21,7 @@ class PodcastSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Podcast
-        fields = "__all__"
-        exclude = ()
+        exclude = ('meta_description',)
 
 
 class FeedSerializer(serializers.ModelSerializer):
