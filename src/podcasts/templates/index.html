@@ -25,7 +25,29 @@
     </div>
 
     <div class="grid-container">
-        <h4 class="index__title">Najnovejše epizode</h4>
+        <div class="index__header">
+            <h4 class="index__title">Najnovejše epizode</h4>
+            <div class="index__filters">
+                <i class="fas fa-filter subtle-icon" style="margin-right: 0.5em;"></i>
+                <a href="{% if paginator.number != 1 %}
+                    ?page={{ paginator.number }}
+                    {% else %}
+                        /
+                    {% endif %}">Vsi</a>
+                <span class="index__filters__sep subtle-icon">●</span>
+                <a href="{% if paginator.number > 1 %}
+                    ?page={{ paginator.number }}&filter_by=indie
+                    {% else %}
+                        ?filter_by=indie
+                    {% endif %}">Indie</a>
+                <span class="index__filters__sep subtle-icon">●</span>
+                <a href="{% if paginator.number > 1 %}
+                    ?page={{ paginator.number }}&filter_by=radio
+                    {% else %}
+                        ?filter_by=radio
+                    {% endif %}">Radio</a>
+            </div>
+        </div>
         {% if latest_episodes %}
             {% for episode in latest_episodes %}
                 {% include 'modules/episode-item.html' %}
