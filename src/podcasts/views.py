@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
@@ -27,6 +28,7 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         page = self.request.GET.get("page")
+        filter_by = self.request.GET.get("filter_by", None)
 
         featured_podcasts = []
         featured = Podcast.objects.order_by("?")[:8]
@@ -38,12 +40,21 @@ class IndexView(TemplateView):
                     "name": podcast.name,
                 }
             )
+
         latest_episodes = Episode.objects.exclude(published_datetime=None).order_by(
             "-published_datetime"
         )
+
+        if filter_by in ["radio", "indie"]:
+            if filter_by == "radio":
+                latest_episodes = latest_episodes.filter(podcast__is_radio=True)
+            else:
+                latest_episodes = latest_episodes.filter(
+                    Q(podcast__is_radio=False) | Q(podcast__is_radio=None)
+                )
+
         paginator = Paginator(latest_episodes, settings.PAGE_SIZE)
         latest_episodes = paginator.get_page(page)
-
         episodes = []
         for episode in latest_episodes:
             episodes.append(
@@ -76,6 +87,7 @@ class IndexView(TemplateView):
                 "latest_episodes": episodes,
                 "paginator": latest_episodes,
                 "featured_podcasts": featured_podcasts,
+                "filter_by": filter_by,
             }
         )
         return context

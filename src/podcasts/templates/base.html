@@ -12,12 +12,16 @@
         <link rel="apple-touch-icon" href="icon.png">
         <!-- Place favicon.ico in the root directory -->
 
+        {% if filter_by %}
+            <meta name="robots" content="noindex">
+        {% endif %}
+
         {% if paginator.paginator.num_pages > 1 %}
             {% if paginator.has_previous %}
-                <link rel="prev" href="?page={{ paginator.previous_page_number }}">
+                <link rel="prev" href="?page={{ paginator.previous_page_number }}{% if filter_by %}&filter_by={{ filter_by }}{% endif %}">
             {% endif %}
             {% if paginator.has_next %}
-                <link rel="next" href="?page={{ paginator.next_page_number }}">
+                <link rel="next" href="?page={{ paginator.next_page_number }}{% if filter_by %}&filter_by={{ filter_by }}{% endif %}">
             {% endif %}
         {% endif %}
 

@@ -101,14 +101,32 @@ hr {
 }
 
 
-.index__title {
+.index__header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
     margin-bottom: 1.3em;
+}
+.index__title {
     width: auto;
     display: table;
     border-left: 6px solid #412b40;
     padding-left: 0.5em;
+    margin: 0;
+    margin-right: 1em;
 }
-
+.index__filters {
+    font-size: 0.9em;
+    margin-left: auto;
+    text-align: right;
+    width: 190px;
+}
+.index__filters__sep {
+    font-size: 0.5em;
+    position: relative;
+    bottom: 2px;
+    margin: 0 0.5em;
+}
 
 .featured {
     text-align: center;
@@ -138,4 +156,7 @@ hr {
 
 .subtle-icon {
     color: #dcdcdc;
+}
+.small-icon {
+    font-size: 0.5em;
 }
