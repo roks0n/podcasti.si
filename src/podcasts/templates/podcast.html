@@ -50,7 +50,10 @@
 
         <br>
 
-        <h4 class="index__title">Najnovejše epizode</h4>
+        <div class="index__header">
+            <h4 class="index__title">Najnovejše epizode</h4>
+        </div>
+
         {% if episodes %}
             {% for episode in episodes %}
                 {% include 'modules/episode-item.html' %}
