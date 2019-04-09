@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from podcasts.models import Episode, Podcast
+from podcasts.models import Category, Episode, Podcast
 
 
 @admin.register(Podcast)
@@ -11,3 +11,8 @@ class PodcastAdmin(admin.ModelAdmin):
 @admin.register(Episode)
 class EpisodeAdmin(admin.ModelAdmin):
     search_fields = ("title",)
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    search_fields = ("name",)
