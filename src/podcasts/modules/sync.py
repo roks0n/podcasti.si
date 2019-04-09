@@ -31,8 +31,16 @@ def sync_podcast(podcast):
     ident_name = parser.episode_identifier
 
     for episode in episodes:
-        if not Episode.objects.filter(
+        episodes_query = Episode.objects.filter(
             **{ident_name: episode[ident_name], "podcast": podcast}
-        ).exists():
+        )
+
+        if not episodes_query.exists():
             episode.update({"podcast": podcast})
             Episode.objects.create(**episode)
+        else:
+            for ep in episodes_query:
+                if ep.identifier:
+                    continue
+                ep.identifier = episode["identifier"]
+                ep.save(update_fields=["identifier"])

@@ -15,6 +15,7 @@ class Podcast(models.Model):
     created_datetime = models.DateTimeField(auto_now_add=True)
     disabled = models.BooleanField(default=False)
     is_radio = models.NullBooleanField(default=False)
+    category = models.ForeignKey("Category", on_delete=models.SET_NULL, blank=True, null=True)
     meta_description = models.CharField(max_length=300, null=True)
 
     def __str__(self):
@@ -62,3 +63,8 @@ class Stats(models.Model):
 
     def __repr__(self):
         return f'<Stats "{self.payload["type"]}" on "{self.day}">'
+
+
+class Category(models.Model):
+    slug = models.SlugField(max_length=50)
+    name = models.CharField(max_length=50)
