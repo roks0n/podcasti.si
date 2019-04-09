@@ -38,9 +38,3 @@ def sync_podcast(podcast):
         if not episodes_query.exists():
             episode.update({"podcast": podcast})
             Episode.objects.create(**episode)
-        else:
-            for ep in episodes_query:
-                if ep.identifier:
-                    continue
-                ep.identifier = episode["identifier"]
-                ep.save(update_fields=["identifier"])

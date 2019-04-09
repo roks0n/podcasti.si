@@ -11,7 +11,7 @@ import requests
 
 
 class BasePodcastParser:
-    episode_identifier = Episode.title.field_name
+    episode_identifier = Episode.identifier.field_name
 
     def __init__(self, podcast_feed, *args, **kwargs):
         raise NotImplementedError
@@ -149,9 +149,6 @@ class ZakulisjeParser(PlainPodcastParser):
 
 
 class RadioGaGaParser(DefaultPodcastParser):
-
-    episode_identifier = Episode.audio.field_name
-
     def parse_title(self, episode_xml):
         title = episode_xml.title.strip()
         if title.lower().replace(" ", "").replace("-", "") == "radiogaga":
