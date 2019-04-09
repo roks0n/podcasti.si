@@ -68,3 +68,9 @@ class Stats(models.Model):
 class Category(models.Model):
     slug = models.SlugField(max_length=50)
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.name}"
+
+    def __repr__(self):
+        return f'<Category "{self.name}">'
