@@ -50,6 +50,7 @@ hr {
     margin-bottom: 0.5em;
 }
 .episode__content {
+    margin: 0 !important;
     align-content: space-evenly;
     display: grid;
 }
@@ -71,6 +72,23 @@ hr {
     align-content: space-evenly;
     display: grid;
     text-align: center;
+}
+
+@media only screen and (max-width: 550px) {
+    .episode__title {
+        font-size: 0.9em;
+    }
+    .episode__image {
+        width: 50px;
+    }
+    .episode__podcast {
+        font-size: 0.6em;
+        margin: 0;
+    }
+    .episode__published {
+        font-size: 0.6em;
+    }
+
 }
 
 
@@ -126,6 +144,11 @@ hr {
     position: relative;
     bottom: 2px;
     margin: 0 0.5em;
+}
+@media only screen and (max-width: 420px) {
+    .index__filters {
+        display: none;
+    }
 }
 
 .featured {
