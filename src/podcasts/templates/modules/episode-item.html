@@ -21,6 +21,11 @@
                 <i class="fas fa-building subtle-icon" style="margin-left: 0.7em;"></i>
                 <span style="color: #412b40">Radio podcast</span>
             {% endif %}
+
+            {% if episode.podcast_category %}
+                <i class="fas fa-hashtag subtle-icon" style="margin-left: 0.7em;"></i>
+                <span style="color: #412b40">{{ episode.podcast_category }}</span>
+            {% endif %}
         </p>
     </div>
      <div class="shrink cell episode__published">

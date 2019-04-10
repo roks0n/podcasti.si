@@ -7,6 +7,7 @@ from django.views.generic import TemplateView
 
 from podcasts import serializers
 from podcasts.models import Episode, Podcast
+from podcasts.utils.categories import CATEGORIES_TRANSLATIONS
 from podcasts.utils.images import get_thumbnail_url
 from podcasts.utils.stats import track_episode, track_podcast
 from podcasts.utils.time import pretty_date
@@ -57,6 +58,10 @@ class IndexView(TemplateView):
         latest_episodes = paginator.get_page(page)
         episodes = []
         for episode in latest_episodes:
+            podcast_category = None
+            if episode.podcast.category:
+                podcast_category = CATEGORIES_TRANSLATIONS.get(episode.podcast.category.name)
+
             episodes.append(
                 {
                     "title": episode.title,
@@ -66,6 +71,7 @@ class IndexView(TemplateView):
                     "image": get_thumbnail_url(episode.podcast.image),
                     "slug": episode.slug,
                     "podcast_slug": episode.podcast.slug,
+                    "podcast_category": podcast_category,
                     "external_url": episode.url,
                 }
             )
