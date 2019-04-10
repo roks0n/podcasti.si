@@ -1,9 +1,6 @@
 {% if paginator.paginator.num_pages > 1 %}
 <ul class="pagination text-center" role="navigation" aria-label="Pagination">
     {% if paginator.has_previous %}
-        <li>
-            <a href="?page=1{% if filter_by %}&filter_by={{ filter_by }}{% endif %}">Prva</a>
-        </li>
         <li class="pagination-previous">
             <a
                 href="?page={{ paginator.previous_page_number }}{% if filter_by %}&filter_by={{ filter_by }}{% endif %}"
@@ -29,14 +26,6 @@
                 aria-label="Next page"
             >
                 Naprej
-            </a>
-        </li>
-        <li>
-            <a
-                href="?page={{ paginator.paginator.num_pages }}{% if filter_by %}&filter_by={{ filter_by }}{% endif %}"
-                aria-label="Last page"
-            >
-                Zadnja
             </a>
         </li>
     {% else %}
