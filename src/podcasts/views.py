@@ -303,8 +303,10 @@ class ApiPodcasts(viewsets.ReadOnlyModelViewSet):
 
 class ApiFeed(viewsets.ReadOnlyModelViewSet):
     lookup_field = "slug"
-    queryset = Episode.objects.prefetch_related("podcast").order_by(
-        "-published_datetime", "-created_datetime"
+    queryset = (
+        Episode.objects.prefetch_related("podcast")
+        .exclude(published_datetime=None)
+        .order_by("-published_datetime", "-created_datetime")
     )
     serializer_class = serializers.FeedSerializer
 
