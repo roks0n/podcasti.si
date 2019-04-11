@@ -250,13 +250,19 @@ class EpisodeCategoryView(TemplateView):
 
         context.update(
             {
-                "seo": {"title": "todo | podcasti.si", "description": ("todo")},
+                "seo": {
+                    "title": f"Najnovejše epizode v kategoriji {category_i18n} | podcasti.si",
+                    "description": (
+                        f'Najnovejše podcast epizode v kategoriji "{category_i18n}". Najdi epizodo '
+                        "ali podcast, ki te zanima!"
+                    ),
+                },
                 "header": {
                     "url": "https://podcasti.si",
                     "title": "Slovenski Podcasti",
                     "subtitle": "Seznam vseh slovenskih podcastov",
                 },
-                "title": f'Najnovejše iz kategorije "{category_i18n}"',
+                "title": f'Najnovejše v kategoriji "{category_i18n}"',
                 "latest_episodes": episodes,
                 "paginator": latest_episodes,
                 "filter_by": filter_by,
