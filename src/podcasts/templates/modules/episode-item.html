@@ -22,9 +22,11 @@
                 <span style="color: #412b40">Radio podcast</span>
             {% endif %}
 
-            {% if episode.podcast_category %}
-                <i class="fas fa-hashtag subtle-icon" style="margin-left: 0.7em;"></i>
-                <span style="color: #412b40">{{ episode.podcast_category }}</span>
+            {% if episode.podcast_category and episode.category_slug %}
+                <a href="{% url 'latest-episodes-in-category' category_slug=episode.category_slug %}">
+                    <i class="fas fa-hashtag subtle-icon" style="margin-left: 0.7em;"></i>
+                    <span style="color: #412b40">{{ episode.podcast_category }}</span>
+                </a>
             {% endif %}
         </p>
     </div>

@@ -50,20 +50,20 @@ PODCAST_CATEGORIES_TO_SLUGS = {
 }
 
 EPISODE_CATEGORIES_TO_SLUGS = {
-    "Games & Hobbies": "igre-in-hobiji-epizode",
-    "Society & Culture": "druzbene-in-kulturne-epizode",
-    "Business": "poslovne-epizode",
-    "News & Politics": "novicarske-in-politicne-epizode",
-    "Arts": "umetnostne-epizode",
-    "Technology": "tehnoloske-epizode",
-    "Science & Medicine": "znanost-in-medicina-epizode",
-    "Kids & Family": "otroske-in-druzinske-epizode",
-    "Government & Organizations": "vladne-in-organizacijske-epizode",
-    "Sports & Recreation": "sport-in-rekreacija-epizode",
-    "Education": "izobrazevalne-epizode",
-    "TV & Film": "tv-in-filmske-epizode",
-    "Comedy": "komicne-epizode",
-    "Music": "glasbene-epizode",
+    "Games & Hobbies": "igre-in-hobiji",
+    "Society & Culture": "druzbene-in-kulturne",
+    "Business": "poslovne",
+    "News & Politics": "novicarske-in-politicne",
+    "Arts": "umetnostne",
+    "Technology": "tehnoloske",
+    "Science & Medicine": "znanost-in-medicina",
+    "Kids & Family": "otroske-in-druzinske",
+    "Government & Organizations": "vladne-in-organizacijske",
+    "Sports & Recreation": "sport-in-rekreacija",
+    "Education": "izobrazevalne",
+    "TV & Film": "tv-in-filmske",
+    "Comedy": "komicne",
+    "Music": "glasbene",
 }
 
 PODCAST_SLUGS_TO_CATEGORIES = {

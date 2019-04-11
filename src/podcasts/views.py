@@ -7,7 +7,11 @@ from django.views.generic import TemplateView
 
 from podcasts import serializers
 from podcasts.models import Episode, Podcast
-from podcasts.utils.categories import CATEGORIES_TRANSLATIONS, EPISODE_SLUGS_TO_CATEGORIES
+from podcasts.utils.categories import (
+    CATEGORIES_TRANSLATIONS,
+    EPISODE_CATEGORIES_TO_SLUGS,
+    EPISODE_SLUGS_TO_CATEGORIES,
+)
 from podcasts.utils.images import get_thumbnail_url
 from podcasts.utils.stats import track_episode, track_podcast
 from podcasts.utils.time import pretty_date
@@ -59,8 +63,10 @@ class IndexView(TemplateView):
         episodes = []
         for episode in latest_episodes:
             podcast_category = None
+            category_slug = None
             if episode.podcast.category:
                 podcast_category = CATEGORIES_TRANSLATIONS.get(episode.podcast.category.name)
+                category_slug = EPISODE_CATEGORIES_TO_SLUGS.get(episode.podcast.category.name)
 
             episodes.append(
                 {
@@ -72,6 +78,7 @@ class IndexView(TemplateView):
                     "slug": episode.slug,
                     "podcast_slug": episode.podcast.slug,
                     "podcast_category": podcast_category,
+                    "category_slug": category_slug,
                     "external_url": episode.url,
                 }
             )
@@ -207,7 +214,7 @@ class EpisodeCategoryView(TemplateView):
     def get_context_data(self, category_slug, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        category = EPISODE_SLUGS_TO_CATEGORIES.get(f"{category_slug}-epizode")
+        category = EPISODE_SLUGS_TO_CATEGORIES.get(f"{category_slug}")
         if not category:
             raise Http404
 
