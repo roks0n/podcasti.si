@@ -50,9 +50,11 @@ hr {
     margin-bottom: 0.5em;
 }
 .episode__content {
-    margin: 0 !important;
     align-content: space-evenly;
     display: grid;
+}
+.feed .episode__content {
+    margin: 0 !important;
 }
 .episode__title {
     font-size: 1.1em;

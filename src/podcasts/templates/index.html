@@ -48,13 +48,15 @@
                     {% endif %}">Radio</a>
             </div>
         </div>
-        {% if latest_episodes %}
-            {% for episode in latest_episodes %}
-                {% include 'modules/episode-item.html' %}
-            {% endfor %}
-        {% else %}
-            No episodes.
-        {% endif %}
+        <div class="feed">
+            {% if latest_episodes %}
+                {% for episode in latest_episodes %}
+                    {% include 'modules/episode-item.html' %}
+                {% endfor %}
+            {% else %}
+                No episodes.
+            {% endif %}
+        </div>
     </div>
 
     {% include 'modules/pagination.html' %}
