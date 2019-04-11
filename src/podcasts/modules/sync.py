@@ -38,7 +38,10 @@ def sync_podcast(podcast):
             **{ident_name: episode[ident_name], "podcast": podcast}
         )
 
-        if episodes_query.count() > 1:
+        if not episodes_query.exists()
+            episode.update({"podcast": podcast})
+            Episode.objects.create(**episode)
+        elif episodes_query.count() > 1:
             log.warning(f'{episode["title"]} has "{episodes_query.count()}" entries')
             # order all episodes desc, and filter out the latest one (so we're left with old dups)
             episodes_desc = episodes_query.order_by("-created_datetime")[:1]
@@ -47,6 +50,3 @@ def sync_podcast(podcast):
                 f'Deleted "{delete_count} duplicated episodes and left the latest one with '
                 f'id of "{episodes_desc[0].id}"'
             )
-        else:
-            episode.update({"podcast": podcast})
-            Episode.objects.create(**episode)
