@@ -46,8 +46,9 @@ class IndexView(TemplateView):
                 }
             )
 
-        latest_episodes = Episode.objects.exclude(published_datetime=None).order_by(
-            "-published_datetime"
+        latest_episodes = (
+            # exclude here is temp - so we don't have these entries on the top
+            Episode.objects.exclude(published_datetime=None).order_by("-published_datetime")
         )
 
         if filter_by in ["radio", "indie"]:
@@ -225,7 +226,8 @@ class EpisodeCategoryView(TemplateView):
 
         latest_episodes = (
             Episode.objects.filter(podcast__category__name=category)
-            .exclude(podcast__category=None, published_datetime=None)
+            .exclude(podcast__category=None)
+            .exclude(published_datetime=None)  # temp - so we don't have these entries on the top
             .order_by("-published_datetime")
         )
 
