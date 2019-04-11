@@ -1,13 +1,13 @@
 from django.conf import settings
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
 from podcasts import serializers
 from podcasts.models import Episode, Podcast
-from podcasts.utils.categories import CATEGORIES_TRANSLATIONS
+from podcasts.utils.categories import CATEGORIES_TRANSLATIONS, EPISODE_SLUGS_TO_CATEGORIES
 from podcasts.utils.images import get_thumbnail_url
 from podcasts.utils.stats import track_episode, track_podcast
 from podcasts.utils.time import pretty_date
@@ -90,6 +90,7 @@ class IndexView(TemplateView):
                     "title": "Slovenski Podcasti",
                     "subtitle": "Seznam vseh slovenskih podcastov",
                 },
+                "title": "Najnovejše epizode",
                 "latest_episodes": episodes,
                 "paginator": latest_episodes,
                 "featured_podcasts": featured_podcasts,
@@ -195,6 +196,70 @@ class AllPodcastsView(TemplateView):
                     "subtitle": "Seznam vseh slovenskih podcastov",
                 },
                 "podcasts": podcasts,
+            }
+        )
+        return context
+
+
+class EpisodeCategoryView(TemplateView):
+    template_name = "index.html"
+
+    def get_context_data(self, category_slug, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        category = EPISODE_SLUGS_TO_CATEGORIES.get(f"{category_slug}-epizode")
+        if not category:
+            raise Http404
+
+        category_i18n = CATEGORIES_TRANSLATIONS.get(category)
+
+        page = self.request.GET.get("page")
+        filter_by = self.request.GET.get("filter_by", None)
+
+        latest_episodes = (
+            Episode.objects.filter(podcast__category__name=category)
+            .exclude(podcast__category=None, published_datetime=None)
+            .order_by("-published_datetime")
+        )
+
+        if filter_by in ["radio", "indie"]:
+            if filter_by == "radio":
+                latest_episodes = latest_episodes.filter(podcast__is_radio=True)
+            else:
+                latest_episodes = latest_episodes.filter(
+                    Q(podcast__is_radio=False) | Q(podcast__is_radio=None)
+                )
+
+        paginator = Paginator(latest_episodes, settings.PAGE_SIZE)
+        latest_episodes = paginator.get_page(page)
+        episodes = []
+        for episode in latest_episodes:
+            episodes.append(
+                {
+                    "title": episode.title,
+                    "podcast_name": episode.podcast.name,
+                    "is_radio": episode.podcast.is_radio,
+                    "published": pretty_date(episode.published_datetime),
+                    "image": get_thumbnail_url(episode.podcast.image),
+                    "slug": episode.slug,
+                    "podcast_slug": episode.podcast.slug,
+                    "podcast_category": None,
+                    "external_url": episode.url,
+                }
+            )
+
+        context.update(
+            {
+                "seo": {"title": "todo | podcasti.si", "description": ("todo")},
+                "header": {
+                    "url": "https://podcasti.si",
+                    "title": "Slovenski Podcasti",
+                    "subtitle": "Seznam vseh slovenskih podcastov",
+                },
+                "title": f'Najnovejše iz kategorije "{category_i18n}"',
+                "latest_episodes": episodes,
+                "paginator": latest_episodes,
+                "filter_by": filter_by,
             }
         )
         return context

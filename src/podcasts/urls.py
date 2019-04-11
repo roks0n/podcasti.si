@@ -18,6 +18,11 @@ urlpatterns = (
             views.EpisodeView.as_view(),
             name="episode",
         ),
+        path(
+            "<str:category_slug>-epizode/",
+            views.EpisodeCategoryView.as_view(),
+            name="latest-episodes-in-category",
+        ),
         path("<slug:podcast_slug>/", views.PodcastView.as_view(), name="podcast"),
         path(
             "sitemap.xml",
