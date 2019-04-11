@@ -1,5 +1,8 @@
 from podcasts.models import Episode
 from podcasts.modules.parsers.base import BasePodcastParser, DefaultPodcastParser
+from podcasts.utils.logger import get_log
+
+log = get_log(__name__)
 
 
 def get_parser(base_class, class_name):
@@ -35,6 +38,15 @@ def sync_podcast(podcast):
             **{ident_name: episode[ident_name], "podcast": podcast}
         )
 
-        if not episodes_query.exists():
+        if episodes_query.count() > 1:
+            log.warning(f'{episode["title"]} has "{episodes_query.count()}" entries')
+            # order all episodes desc, and filter out the latest one (so we're left with old dups)
+            episodes_desc = episodes_query.order_by("-created_datetime")[:1]
+            delete_count, _ = Episode.objects.filter(id__in=episodes_desc.values("id")).delete()
+            log.info(
+                f'Deleted "{delete_count} duplicated episodes and left the latest one with '
+                f'id of "{episodes_desc[0].id}"'
+            )
+        else:
             episode.update({"podcast": podcast})
             Episode.objects.create(**episode)
