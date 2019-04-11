@@ -38,7 +38,7 @@ def sync_podcast(podcast):
             **{ident_name: episode[ident_name], "podcast": podcast}
         )
 
-        if not episodes_query.exists()
+        if not episodes_query.exists():
             episode.update({"podcast": podcast})
             Episode.objects.create(**episode)
         elif episodes_query.count() > 1:
