@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from django.conf import settings
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -36,7 +38,14 @@ class IndexView(TemplateView):
         filter_by = self.request.GET.get("filter_by", None)
 
         featured_podcasts = []
-        featured = Podcast.objects.order_by("?")[:8]
+
+        latest_episodes = (
+            Episode.objects.exclude(published_datetime=None)
+            .filter(published_datetime__gte=datetime.now() - timedelta(days=30))
+            .values("podcast__id")
+            .distinct()
+        )
+        featured = Podcast.objects.filter(id__in=latest_episodes).order_by("?")[:8]
         for podcast in featured:
             featured_podcasts.append(
                 {
