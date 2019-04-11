@@ -1,7 +1,7 @@
 """
 Games & Hobbies - Igre in hobiji - igre-in-hobiji-podcasti
 Society & Culture - Družba in kultura - druzbeni-in-kulturni-podcasti
-Business - Posel - poslovni-podcasti
+Business - Podjetništvo - podjetniski-podcasti
 News & Politics - Novice in politika -  novicarski-in-politicni-podcasti
 Arts - Umetnost - umetnostni-podcasti
 Technology - Tehnologija - tehnoloski-podcasti
@@ -18,7 +18,7 @@ Music - Glasba - glasbeni-podcasti
 CATEGORIES_TRANSLATIONS = {
     "Games & Hobbies": "Igre in hobiji",
     "Society & Culture": "Družba in kultura",
-    "Business": "Posel",
+    "Business": "Podjetništvo",
     "News & Politics": "Novice in politika",
     "Arts": "Umetnost",
     "Technology": "Tehnologija",
@@ -35,7 +35,7 @@ CATEGORIES_TRANSLATIONS = {
 PODCAST_CATEGORIES_TO_SLUGS = {
     "Games & Hobbies": "igre-in-hobiji-podcasti",
     "Society & Culture": "druzbeni-in-kulturni-podcasti",
-    "Business": "poslovni-podcasti",
+    "Business": "podjetniski-podcasti",
     "News & Politics": "novicarski-in-politicni-podcasti",
     "Arts": "umetnostni-podcasti",
     "Technology": "tehnoloski-podcasti",
@@ -52,7 +52,7 @@ PODCAST_CATEGORIES_TO_SLUGS = {
 EPISODE_CATEGORIES_TO_SLUGS = {
     "Games & Hobbies": "igre-in-hobiji",
     "Society & Culture": "druzbene-in-kulturne",
-    "Business": "poslovne",
+    "Business": "podjetniske",
     "News & Politics": "novicarske-in-politicne",
     "Arts": "umetnostne",
     "Technology": "tehnoloske",
