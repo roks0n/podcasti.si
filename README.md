@@ -16,9 +16,9 @@ Ce imas idejo jo lahko dodas pod Github Issue ali pisi @roks0n na Twitter.
 #### Navodila za kreiranje ticketa
 1. Kreiraj Github Issue
 2. Napisi kratek in razumljiv title
-3.. Napisi strnjen in natancen decription. V kolikor ocenis da bo pomagalo, dodaj se linke do primerov ali attachment (sliko/video).
+3. Napisi strnjen in natancen decription. V kolikor ocenis da bo pomagalo, dodaj se linke do primerov ali attachment (sliko/video).
 
-**Nerazumljivi ticketi bodo izbrisani.**
+**Nerazumljivi issue-i bodo izbrisani.**
 
 ## Kako pognati podcasti.si lokalno?
 Potrebujes Docker in docker-compose
