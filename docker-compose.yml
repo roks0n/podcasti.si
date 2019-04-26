@@ -9,7 +9,7 @@ services:
       - .:/home/app/code
     depends_on:
       - db
-    command: uwsgi --http 0.0.0.0:8000 --honour-stdin --ini etc/uwsgi-dev.ini
+    command: django-admin runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
     environment:

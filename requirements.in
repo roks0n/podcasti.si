@@ -1,6 +1,5 @@
 boto3==1.9.36
 black
-beautifulsoup4==4.7.1
 Django
 django-environ
 djangorestframework==3.9.2
@@ -11,7 +10,6 @@ flake8-broken-line
 flake8-bugbear
 flake8-import-order
 lxml==4.3.3
-Pillow==6.0.0
 psycopg2-binary==2.7.5
 pytz
 pytest

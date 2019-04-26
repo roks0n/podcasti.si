@@ -14,7 +14,7 @@ RUN rm -rf /var/cache/apt && \
     rm -rf /var/cache/apt && \
     rm -rf /var/lib/apt/lists/* && \
     pip install --upgrade pip setuptools && \
-    pip install pip-tools==3.6.0 && \
+    pip install pip-tools==3.6.1 && \
     pip install -r /tmp/requirements.txt && \
     rm -f /tmp/requirements.txt
 
