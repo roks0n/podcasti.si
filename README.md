@@ -5,21 +5,18 @@ Najvecja zbirka slovenskih podcastov. Stran namenjena odkrivanju podcastov iz na
 ### 🤓 Code
 Feel free to open as many PRs as you want. 💪
 
-Obstaja tudi [public todo lista](https://trello.com/b/uiI85sUB/podcastisi). Ce ti je kak task vsec, se [joinaj](https://trello.com/invite/b/uiI85sUB/4bc0d20f964b10b8ba70a84975fbee55/podcastisi) in assignaj na task. V primeru vprasanj in morebitnih usmeritev poslji msg @roks0n. Vsakega odprtega PRa bom zelo vesel in se maksimalno potrudil, da ga pogledam v roku 24h. :)
+Za idejo kje pomagati, si lahko [pogledas tudi odpre "taske"](https://github.com/roks0n/podcasti.si/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22). V primeru vprasanj in morebitnih usmeritev poslji msg @roks0n. Vsakega odprtega PRa bom zelo vesel in se maksimalno potrudil, da ga pogledam v roku 24h. :)
 
 ### ❓ Manjka podcast?
 V primeru da manjka podcast, ga je potrebno rocno vnesti. Lahko posljes request na [te formi](https://rksn.typeform.com/to/EljGwv).
 
 ### 💡 Ideas
-Ce imas idejo jo lahko dodas na [Trello](https://trello.com/b/uiI85sUB/podcastisi), vendar se moras prijaviti v team s [tem linkom](https://trello.com/invite/b/uiI85sUB/4bc0d20f964b10b8ba70a84975fbee55/podcastisi).
-Spudbujamo tudi **glasovanje na ideje**, kar bo olajsalo prioritizacijo taskov.
+Ce imas idejo jo lahko dodas pod Github Issue ali pisi @roks0n na Twitter.
 
 #### Navodila za kreiranje ticketa
-1. Prijavi se v Trello (v kolikor se nisi, se moras registrirati)
-2. Joinaj board s [tem linkom](https://trello.com/invite/b/uiI85sUB/4bc0d20f964b10b8ba70a84975fbee55/podcastisi)
-3. Idejo/feature request dodaj pod stolpec "Feature requests/Ideas"
-4. Napisi kratek in razumljiv title
-5. Napisi strnjen in natancen decription. V kolikor ocenis da bo pomagalo, dodaj se linke do primerov ali attachment (sliko/video).
+1. Kreiraj Github Issue
+2. Napisi kratek in razumljiv title
+3.. Napisi strnjen in natancen decription. V kolikor ocenis da bo pomagalo, dodaj se linke do primerov ali attachment (sliko/video).
 
 **Nerazumljivi ticketi bodo izbrisani.**
 
