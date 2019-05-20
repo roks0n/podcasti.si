@@ -4,12 +4,19 @@
 <script type="application/ld+json">
 [{
   "@context": "http://schema.org",
-  "@type": "RadioSeries",
+  "@type": "CreativeWork",
   "name": "{{ podcast.name }} Podcast",
   "description": "{{ podcast.description }}",
-  "episode": {
-    "@type": "RadioEpisode"
-  }
+  "workExample": [
+    {% for episode in episodes_feed %}
+      {
+        "@type": "AudioObject",
+        "name": "{{ episode.title }}",
+        "datePublished": "{{ episode.published_datetime|date:"d M Y" }}",
+        "requiresSubscription": "no"
+      }
+    {% endfor %}
+  ]
 }]
 </script>
 {% endblock %}

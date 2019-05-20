@@ -109,6 +109,7 @@ class IndexView(TemplateView):
                 },
                 "title": "Najnovejše epizode",
                 "latest_episodes": episodes,
+
                 "paginator": latest_episodes,
                 "featured_podcasts": featured_podcasts,
                 "filter_by": filter_by,
@@ -156,8 +157,8 @@ class PodcastView(TemplateView):
 
         page = self.request.GET.get("page")
 
-        latest_episodes = podcast.episode_set.order_by("-published_datetime", "-created_datetime")
-        paginator = Paginator(latest_episodes, settings.PAGE_SIZE)
+        episodes = podcast.episode_set.order_by("-published_datetime", "-created_datetime")
+        paginator = Paginator(episodes, settings.PAGE_SIZE)
         latest_episodes = paginator.get_page(page)
 
         episodes = []
@@ -187,6 +188,7 @@ class PodcastView(TemplateView):
                 "podcast": podcast,
                 "podcast_image": get_thumbnail_url(podcast.image),
                 "episodes": episodes,
+                "episodes_feed": latest_episodes[:10],
                 "paginator": latest_episodes,
             }
         )
