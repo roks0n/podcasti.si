@@ -109,7 +109,6 @@ class IndexView(TemplateView):
                 },
                 "title": "Najnovejše epizode",
                 "latest_episodes": episodes,
-
                 "paginator": latest_episodes,
                 "featured_podcasts": featured_podcasts,
                 "filter_by": filter_by,
