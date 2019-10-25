@@ -34,6 +34,13 @@
         Objavljeno<br/>
         {{ episode.published }}
     </div>
+    {% if is_staff %}
+        <div class="shrink cell episode__content hide-for-small-only">
+        <a href="{% url 'admin:podcasts_episode_change' object_id=episode.id  %}">
+            <i class="fas fa-edit" style="margin-right: 0.5em;"></i>
+        </a>
+    </div>
+    {% endif %}
     <div class="shrink cell episode__content hide-for-small-only">
         <a href="{% url 'episode' podcast_slug=episode.podcast_slug episode_slug=episode.slug %}">
             Poglej <i class="fas fa-chevron-right" style="margin-right: 0.5em;"></i>

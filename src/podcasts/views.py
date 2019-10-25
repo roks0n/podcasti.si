@@ -80,6 +80,7 @@ class IndexView(TemplateView):
 
             episodes.append(
                 {
+                    "id": episode.id,
                     "title": episode.title,
                     "podcast_name": episode.podcast.name,
                     "is_radio": episode.podcast.is_radio,
@@ -112,6 +113,7 @@ class IndexView(TemplateView):
                 "paginator": latest_episodes,
                 "featured_podcasts": featured_podcasts,
                 "filter_by": filter_by,
+                "is_staff": self.request.user.is_staff,
             }
         )
         return context
@@ -164,6 +166,7 @@ class PodcastView(TemplateView):
         for episode in latest_episodes:
             episodes.append(
                 {
+                    "id": episode.id,
                     "title": episode.title,
                     "podcast_name": episode.podcast.name,
                     "published": pretty_date(episode.published_datetime),
@@ -189,6 +192,7 @@ class PodcastView(TemplateView):
                 "episodes": episodes,
                 "episodes_feed": latest_episodes[:10],
                 "paginator": latest_episodes,
+                "is_staff": self.request.user.is_staff,
             }
         )
         return context
@@ -255,6 +259,7 @@ class EpisodeCategoryView(TemplateView):
         for episode in latest_episodes:
             episodes.append(
                 {
+                    "id": episode.id,
                     "title": episode.title,
                     "podcast_name": episode.podcast.name,
                     "is_radio": episode.podcast.is_radio,

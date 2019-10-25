@@ -1,6 +1,9 @@
+from django.utils.text import slugify
+
 from podcasts.models import Episode
 from podcasts.modules.parsers.base import BasePodcastParser, DefaultPodcastParser
 from podcasts.utils.logger import get_log
+
 
 log = get_log(__name__)
 
@@ -51,3 +54,9 @@ def sync_podcast(podcast):
                 f'Deleted "{delete_count} duplicated episodes and left the latest one with '
                 f'id of "{episodes_desc[0].id}"'
             )
+        else:
+            ep_qs = episodes_query[0]
+            if episode["title"] != ep_qs.title:
+                ep_qs.title = episode["title"]
+                ep_qs.slug = slugify(episode["title"])
+                ep_qs.save()
