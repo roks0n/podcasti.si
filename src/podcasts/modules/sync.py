@@ -62,4 +62,3 @@ def sync_podcast(podcast):
             if episode["description"] != ep_qs.description:
                 ep_qs.description = episode["description"]
             ep_qs.save()
-
