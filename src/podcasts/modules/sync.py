@@ -58,6 +58,8 @@ def sync_podcast(podcast):
             ep_qs = episodes_query[0]
             if episode["title"] != ep_qs.title:
                 ep_qs.title = episode["title"]
-                ep_qs.description = episode["description"]
                 ep_qs.slug = slugify(episode["title"])
-                ep_qs.save()
+            if episode["description"] != ep_qs.description:
+                ep_qs.description = episode["description"]
+            ep_qs.save()
+
