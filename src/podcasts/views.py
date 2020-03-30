@@ -127,7 +127,7 @@ class EpisodeView(TemplateView):
 
     def get_context_data(self, podcast_slug, episode_slug, **kwargs):
         context = super().get_context_data(**kwargs)
-        episode_qs = Episode.objects.filter(slug=episode_slug, podcast__slug=podcast)
+        episode_qs = Episode.objects.filter(slug=episode_slug, podcast__slug=podcast_slug)
         if not episode_qs.exists():
             raise Http404
         
