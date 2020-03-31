@@ -134,7 +134,7 @@ class EpisodeView(TemplateView):
         
         if episode_qs.count() > 1:
             log.warning(f"{episode_slug} has ({episode_qs.count()}) duplicated episodes!")
-            episode = episode.last()
+            episode = episode_qs.last()
         else:
             episode = episode_qs.get()
 
