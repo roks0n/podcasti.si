@@ -91,7 +91,7 @@ class DefaultPodcastParser(BasePodcastParser):
         title = episode_xml.title.strip()
         if len(title) >= 256:
             title = f"{title[:256-3]}..."
-        return episode_xml.title.strip()
+        return title
 
     def parse_description(self, episode_xml):
         if "content" not in episode_xml:
