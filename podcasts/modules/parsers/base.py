@@ -88,6 +88,9 @@ class DefaultPodcastParser(BasePodcastParser):
         return episode_xml.id
 
     def parse_title(self, episode_xml):
+        title = episode_xml.title.strip()
+        if len(title) >= 256:
+            title = f"{title[:256-3]}..."
         return episode_xml.title.strip()
 
     def parse_description(self, episode_xml):
