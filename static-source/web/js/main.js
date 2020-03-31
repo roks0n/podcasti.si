@@ -18,34 +18,22 @@ $('a[data-place]').on('click', function() {
 });
 
 $(document).ready(function() {
-    var socialPhotosContainer = $('ul.social-photos');
-    if (socialPhotosContainer.length === 1) {
-        generateInstagramPhotoFeed();
+    var player = new Plyr('#player');
+    var audio = document.querySelector('#player');
+    if (audio) {
+        var episodeName = audio.getAttribute('data-episode');
+        var podcastName = audio.getAttribute('data-podcast');
     }
 
-    var players = plyr.setup();
-    if (players != false) {
-        var player = players[0];
-        player.on('playing', function(event) {
-            var instance = event.detail.plyr;
-
-            var audio = instance.getContainer().querySelector('audio');
-            var episodeName = audio.getAttribute('data-episode');
-            var podcastName = audio.getAttribute('data-podcast');
-
+    if (audio && player != false) {
+        player.on('playing', function() {
             gtag('event', 'play', {
                 'podcast': podcastName,
                 'episode': episodeName
             });
         });
 
-        player.on('pause', function(event) {
-            var instance = event.detail.plyr;
-
-            var audio = instance.getContainer().querySelector('audio');
-            var podcastName = audio.getAttribute('data-podcast');
-            var episodeName = audio.getAttribute('data-episode');
-
+        player.on('pause', function() {
             gtag('event', 'pause', {
                 'podcast': podcastName,
                 'episode': episodeName
@@ -53,23 +41,3 @@ $(document).ready(function() {
         });
     }
 });
-
-function generateInstagramPhotoFeed() {
-    var socialPhotosContainer = $('ul.social-photos');
-    var userName = socialPhotosContainer[0].dataset.slug;
-    $.ajax({
-        url: 'https://www.instagram.com/' + userName + '/?__a=1',
-        type: 'GET',
-        success: function(data) {
-            var images = data.user.media.nodes;
-            for (i = 0; i < images.length; i++) {
-                var thumbnails = images[i].thumbnail_resources
-                var biggestImage = thumbnails.slice(-1)[0];
-                socialPhotosContainer.append('<li class="social-photos__photo"><img src="' + biggestImage.src + '"></li>');
-            }
-        },
-        error: function(data){
-            console.log(data); // send the error notifications to console
-        }
-    });
-}

@@ -58,7 +58,7 @@
                 <p>{{ episode.description }}</p>
 
                 {% if episode.audio %}
-                    <audio controls class="player" data-podcast="{{ episode.podcast.name }}" data-episode="{{ episode.title }}">
+                    <audio preload="none" controls class="player" id="player" data-podcast="{{ episode.podcast.name }}" data-episode="{{ episode.title }}">
                         <source src="{{ episode.audio }}" type="audio/mp3">
                     </audio>
                     <br>

@@ -120,6 +120,36 @@ hr {
     width: 100%;
 }
 
+.player audio {
+    outline: none;
+}
+
+.plyr--audio {
+    z-index: 99999;
+    position: relative;
+}
+.plyr__menu__container {
+    background: rgba(255,255,255,1);
+}
+.plyr--audio .plyr__progress__buffer {
+    color: rgb(59, 37, 54);
+}
+.plyr--audio .plyr__controls {
+    background: #f4f4f4;
+}
+.plyr--full-ui input[type=range] {
+    color: #3b2636;
+}
+.plyr--audio .plyr__control.plyr__tab-focus, .plyr--audio .plyr__control:hover, .plyr--audio .plyr__control[aria-expanded=true] {
+    background: #3b2636;
+    color: #fff;
+}
+.plyr__menu__container .plyr__control[role=menuitemradio][aria-checked=true]::before {
+    background: #3b2636;
+}
+.plyr__menu__container .plyr__control[role=menuitemradio].plyr__tab-focus::before, .plyr__menu__container .plyr__control[role=menuitemradio]:hover::before {
+    background: rgba(255, 255, 255, 0.3);
+}
 
 .index__header {
     display: flex;
