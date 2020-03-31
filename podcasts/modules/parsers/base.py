@@ -11,7 +11,7 @@ import requests
 
 
 class BasePodcastParser:
-    episode_identifier = Episode.identifier.field_name
+    episode_identifier = Episode.identifier.field.name
 
     def __init__(self, podcast_feed, *args, **kwargs):
         raise NotImplementedError
