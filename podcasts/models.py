@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.utils.text import slugify
@@ -48,9 +50,16 @@ class Episode(models.Model):
         return f'<Episode "{self.title}" from "{self.podcast.name}">'
 
     def save(self, *args, **kwargs):
-        if not self.pk:
-            self.slug = slugify(self.title)
+        if not self.pk or not self.slug:
+            slug = slugify(self.title)
+            proposed_slug = slug if slug else str(uuid.uuid4())
+            if not self.is_unique_slug(proposed_slug):
+                proposed_slug = f"{proposed_slug}-{self.published_datetime.strftime('%Y-%m-%d')}"
+            self.slug = proposed_slug
         super().save(*args, **kwargs)
+
+    def is_unique_slug(self, slug):
+        return not Episode.objects.filter(slug=slug).exists()
 
 
 class Stats(models.Model):

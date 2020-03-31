@@ -1,7 +1,7 @@
 FROM python:3.7-stretch
 
 ENV DJANGO_SETTINGS_MODULE=podcasts.settings \
-    PYTHONPATH=/home/app/code/src
+    PYTHONPATH=/home/app/code
 
 COPY requirements.txt /tmp/requirements.txt
 
@@ -14,7 +14,7 @@ RUN rm -rf /var/cache/apt && \
     rm -rf /var/cache/apt && \
     rm -rf /var/lib/apt/lists/* && \
     pip install --upgrade pip setuptools && \
-    pip install pip-tools==4.2.0 && \
+    pip install pip-tools==4.5.1 && \
     pip install -r /tmp/requirements.txt && \
     rm -f /tmp/requirements.txt
 
