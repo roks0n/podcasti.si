@@ -15,9 +15,9 @@ from podcasts.utils.categories import (
     EPISODE_SLUGS_TO_CATEGORIES,
 )
 from podcasts.utils.images import get_thumbnail_url
+from podcasts.utils.logger import get_log
 from podcasts.utils.stats import track_episode, track_podcast
 from podcasts.utils.time import pretty_date
-from podcasts.utils.logger import get_log
 
 from rest_framework import routers, viewsets
 
@@ -127,11 +127,11 @@ class EpisodeView(TemplateView):
 
     def get_context_data(self, podcast_slug, episode_slug, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         episode_qs = Episode.objects.filter(slug=episode_slug, podcast__slug=podcast_slug)
         if not episode_qs.exists():
             raise Http404
-        
+
         if episode_qs.count() > 1:
             log.warning(f"{episode_slug} has ({episode_qs.count()}) duplicated episodes!")
             episode = episode_qs.last()

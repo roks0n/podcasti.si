@@ -42,7 +42,6 @@ def sync_podcast(podcast):
         )
 
         if not episodes_query.exists():
-            # todo: check if same slug already exists, if yes ... append date of published
             episode.update({"podcast": podcast})
             Episode.objects.create(**episode)
         elif episodes_query.count() > 1:
@@ -57,8 +56,10 @@ def sync_podcast(podcast):
         else:
             ep_qs = episodes_query[0]
             if episode["title"] != ep_qs.title:
+                slug = slugify(episode["title"])
                 ep_qs.title = episode["title"]
-                ep_qs.slug = slugify(episode["title"])
+                if slug:
+                    ep_qs.slug = slug
             if episode["description"] != ep_qs.description:
                 ep_qs.description = episode["description"]
             ep_qs.save()

@@ -10,7 +10,7 @@ import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 from sentry_sdk.integrations.logging import LoggingIntegration
 
-root = environ.Path(__file__) - 3
+root = environ.Path(__file__) - 2
 env = environ.Env()
 
 DEBUG = env.bool("DEBUG", default=False)

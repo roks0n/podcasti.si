@@ -1,14 +1,13 @@
-version: '3'
+version: '3.7'
 
 services:
-
   podcasts:
     build:
       context: .
     volumes:
       - .:/home/app/code
     depends_on:
-      - db
+      - "db"
     command: django-admin runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
@@ -20,3 +19,5 @@ services:
 
   db:
     image: postgres:9.6
+    environment:
+      POSTGRES_PASSWORD: 'postgres'

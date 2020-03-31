@@ -99,3 +99,6 @@ black:
 
 black-check:
 	docker-compose run podcasts black --check .
+
+pytest:
+	docker-compose run podcasts py.test -vv -s --nomigrations
