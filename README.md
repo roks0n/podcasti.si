@@ -1,6 +1,11 @@
 # Podcasti.si
 Najvecja zbirka slovenskih podcastov. Stran namenjena odkrivanju podcastov iz nase dezele.
 
+| Build status | |
+|---|---|
+| Linux |[![CircleCI](https://circleci.com/gh/roks0n/podcasti.si/tree/master.svg?style=svg)](https://circleci.com/gh/roks0n/podcasti.si/tree/master)|
+
+
 ## Contributions
 ### 🤓 Code
 Feel free to open as many PRs as you want. 💪
