@@ -1,9 +1,10 @@
 from datetime import datetime
 
+import pytest
 from freezegun import freeze_time
+
 from podcasts.models import Stats
 from podcasts.utils import stats
-import pytest
 
 from tests.podcasts.factory import EpisodeFactory, PodcastFactory
 

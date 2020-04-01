@@ -1,7 +1,8 @@
 from datetime import datetime
 
-from podcasts.models import Episode
 import pytest
+
+from podcasts.models import Episode
 
 
 @pytest.mark.django_db()

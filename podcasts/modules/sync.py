@@ -1,4 +1,5 @@
 from django.utils.text import slugify
+
 from podcasts.models import Episode
 from podcasts.modules.parsers.base import BasePodcastParser, DefaultPodcastParser
 from podcasts.utils.logger import get_log

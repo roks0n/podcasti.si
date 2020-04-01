@@ -1,5 +1,5 @@
-from django.urls import reverse
 import pytest
+from django.urls import reverse
 
 from tests.podcasts.factory import EpisodeFactory, PodcastFactory
 

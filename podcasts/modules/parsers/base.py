@@ -2,9 +2,10 @@ from datetime import datetime
 from time import mktime
 
 import feedparser
-from lxml import etree as ET
-from podcasts.models import Episode
 import requests
+from lxml import etree as ET
+
+from podcasts.models import Episode
 
 
 class BasePodcastParser:

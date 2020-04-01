@@ -1,5 +1,6 @@
-from podcasts import models
 from rest_framework import serializers
+
+from podcasts import models
 
 
 class EpisodeSerializer(serializers.ModelSerializer):
