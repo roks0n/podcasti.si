@@ -17,8 +17,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install requirements
-          command: sudo pip install -r requirements.txt
+          name: Run collectstatic
+          command: django-admin collectstatic --no-input
       - run:
           name: Run linting
           command: flake8 .
