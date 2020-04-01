@@ -17,6 +17,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install requirements
+          command: sudo pip install -r requirements.txt
+      - run:
           name: Run collectstatic
           command: django-admin collectstatic --no-input
       - run:
