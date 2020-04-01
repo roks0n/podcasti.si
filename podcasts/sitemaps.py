@@ -1,6 +1,5 @@
 from django.contrib import sitemaps
 from django.urls import reverse
-
 from podcasts.models import Episode, Podcast
 
 

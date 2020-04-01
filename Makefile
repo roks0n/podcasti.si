@@ -85,20 +85,33 @@ docker-clean-images: ## Remove all docker images
 .PHONY: docker-clean
 docker-clean: docker-clean-containers docker-clean-images
 
+.PHONY: pip-compile
 pip-compile:
-	docker-compose run podcasts pip-compile requirements.in
+	docker-compose run --rm $(NAME) pip-compile requirements.in
 
+.PHONY: pip-upgrade
 pip-upgrade:
-	docker-compose run podcasts pip-compile --upgrade requirements.in
+	docker-compose run --rm $(NAME) pip-compile --upgrade requirements.in
 
+.PHONY: lint
 lint:
-	docker-compose run podcasts flake8 .
+	docker-compose run --rm $(NAME) flake8 .
 
+.PHONY: isort
+isort:
+	docker-compose run --rm $(NAME) isort --recursive podcasts/ tests/
+
+.PHONY: black
 black:
-	docker-compose run podcasts black .
+	docker-compose run --rm $(NAME) black .
 
+.PHONY: fmt
+fmt: isort black
+
+.PHONY: black-check
 black-check:
-	docker-compose run podcasts black --check .
+	docker-compose run --rm $(NAME) black --check .
 
+.PHONY: pytest
 pytest:
-	docker-compose run podcasts py.test -vv -s --nomigrations
+	docker-compose run --rm $(NAME) py.test -vv -s --nomigrations

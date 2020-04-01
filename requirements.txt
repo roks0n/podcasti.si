@@ -19,13 +19,17 @@ django==3.0               # via -r requirements.in, django-storages, djangorestf
 djangorestframework==3.11.0  # via -r requirements.in
 docutils==0.15.2          # via botocore
 entrypoints==0.3          # via flake8
+factory-boy==2.12.0       # via -r requirements.in
+faker==4.0.2              # via -r requirements.in, factory-boy
 feedparser==5.2.1         # via -r requirements.in
 flake8-broken-line==0.2.0  # via -r requirements.in
 flake8-bugbear==20.1.4    # via -r requirements.in
 flake8-import-order==0.18.1  # via -r requirements.in
 flake8==3.7.9             # via -r requirements.in, flake8-broken-line, flake8-bugbear
+freezegun==0.3.15         # via -r requirements.in
 idna==2.9                 # via requests
 importlib-metadata==1.6.0  # via pluggy, pytest
+isort==4.3.21             # via -r requirements.in
 jmespath==0.9.5           # via boto3, botocore
 lxml==4.3.3               # via -r requirements.in
 mccabe==0.6.1             # via flake8
@@ -41,15 +45,16 @@ pyflakes==2.1.1           # via flake8
 pyparsing==2.4.6          # via packaging
 pytest-django==3.8.0      # via -r requirements.in
 pytest==5.4.1             # via -r requirements.in, pytest-django
-python-dateutil==2.8.1    # via botocore
+python-dateutil==2.8.1    # via botocore, faker, freezegun
 pytz==2019.3              # via -r requirements.in, django
 regex==2020.2.20          # via black
 requests==2.23.0          # via -r requirements.in, responses
 responses==0.10.12        # via -r requirements.in
 s3transfer==0.3.3         # via boto3
 sentry-sdk==0.14.3        # via -r requirements.in
-six==1.14.0               # via packaging, python-dateutil, responses
+six==1.14.0               # via freezegun, packaging, python-dateutil, responses
 sqlparse==0.3.1           # via django
+text-unidecode==1.3       # via faker
 toml==0.10.0              # via black
 typed-ast==1.4.1          # via black
 urllib3==1.25.8           # via botocore, requests, sentry-sdk

@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from podcasts.models import Episode
-
 import pytest
 
 

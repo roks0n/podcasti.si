@@ -6,7 +6,6 @@ from django.db.models import Q
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
-
 from podcasts import serializers
 from podcasts.models import Episode, Podcast
 from podcasts.utils.categories import (
@@ -18,7 +17,6 @@ from podcasts.utils.images import get_thumbnail_url
 from podcasts.utils.logger import get_log
 from podcasts.utils.stats import track_episode, track_podcast
 from podcasts.utils.time import pretty_date
-
 from rest_framework import routers, viewsets
 
 log = get_log(__name__)

@@ -4,7 +4,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path
-
 from podcasts import sitemaps, views
 
 urlpatterns = (

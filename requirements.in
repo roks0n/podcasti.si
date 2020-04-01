@@ -9,6 +9,10 @@ flake8
 flake8-broken-line
 flake8-bugbear
 flake8-import-order
+factory-boy
+freezegun
+Faker
+isort
 lxml
 psycopg2-binary==2.8.4
 pytz

@@ -33,14 +33,14 @@
         <div class="grid-x">
             {% if podcasts %}
                 {% regroup podcasts by name|first|upper as podcast_list %}
-                {% for podcasts in podcast_list %}
+                {% for podcast in podcast_list %}
                     <div class="small-6 medium-4 large-4 cell">
-                        <h4>{{ podcasts.grouper }}</h4>
+                        <h4>{{ podcast.grouper }}</h4>
                         <ul>
-                            {% for podcast in podcasts.list %}
+                            {% for p in podcast.list %}
                                 <li>
-                                    <a href="{% url 'podcast' podcast_slug=podcast.slug %}">
-                                        {{ podcast.name }}
+                                    <a href="{% url 'podcast' podcast_slug=p.slug %}">
+                                        {{ p.name }}
                                     </a>
                                 </li>
                             {% endfor %}

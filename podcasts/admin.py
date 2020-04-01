@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from podcasts.models import Category, Episode, Podcast
 
 

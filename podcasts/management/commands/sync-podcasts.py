@@ -1,10 +1,9 @@
-import sys
 from datetime import timedelta
+import sys
 
 from django.core.management.base import BaseCommand
 from django.db.models import Q
 from django.utils import timezone
-
 from podcasts.models import Podcast
 from podcasts.modules.sync import sync_podcast
 from podcasts.utils.logger import get_log
