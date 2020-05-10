@@ -109,7 +109,8 @@ class DefaultPodcastParser(BasePodcastParser):
 
     def parse_audio(self, episode_xml):
         for link in episode_xml.links:
-            if link.type != "audio/mpeg" or link.type != "audio/x-m4a":
+            # eg: audio/mpeg, audio/x-m4a
+            if "audio" not in link.type:
                 continue
             return link.href
 
