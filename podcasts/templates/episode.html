@@ -2,33 +2,22 @@
 
 {% block json_ld %}
 <script type="application/ld+json">
-[{
-  "@context": "http://schema.org",
-  "@type": "RadioSeries",
-  "name": "{{ episode.podcast.name }} Podcast",
-  "description": "{{ episode.podcast.description }}",
-  "episode": {
-    "@type": "RadioEpisode",
-    "publication": [
-      {
-        "@type": "OnDemandEvent",
-        "startDate": "{{ episode.published_datetime | date:'Y-m-d' }}",
-        "publishedOn": {
-          "@type": "BroadcastService",
-          "url": "{{ episode.podcast.website }}"
-        }
-      }
-    ]
-  }
-},
 {
   "@context": "http://schema.org",
-  "@type": "AudioObject",
-  "contentUrl": "{{ episode.audio }}",
-  "description": "{{ episode.title }}",
-  "encodingFormat": "mp3",
-  "name": "{{ episode.podcast.name }}"
-}]
+  "@type": "PodcastEpisode",
+  "name": "{{ episode.title }}",
+  "description": "{{ episode.description }}",
+  "datePublished": "{{ episode.published_datetime | date:'Y-m-d' }}",
+  "associatedMedia": {
+    "@type": "MediaObject",
+    "contentUrl": "{{ episode.audio }}"
+  },
+  "partOfSeries": {
+    "@type": "PodcastSeries",
+    "name": "{{ episode.podcast.name }}",
+    "url": "{{ episode.podcast.website }}"
+  }
+}
 </script>
 {% endblock %}
 
