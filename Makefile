@@ -115,3 +115,7 @@ black-check:
 .PHONY: pytest
 pytest:
 	docker-compose run --rm $(NAME) py.test -vv -s --nomigrations
+
+.PHONY: fake-data
+fake-data:
+	docker-compose run --rm $(NAME) django-admin fake-data

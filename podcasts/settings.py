@@ -46,8 +46,9 @@ INSTALLED_APPS += (
     "podcasts",
 )
 
-if not DEBUG:
-    INSTALLED_APPS += ("django.contrib.sites", "django.contrib.sitemaps")
+
+SITE_ID = 1
+INSTALLED_APPS += ("django.contrib.sites", "django.contrib.sitemaps")
 
 REST_FRAMEWORK = {
     # Use only JSON by default
