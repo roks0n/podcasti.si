@@ -214,7 +214,7 @@ class AllPodcastsView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        podcasts = Podcast.objects.order_by('slug')
+        podcasts = Podcast.objects.order_by("slug")
 
         context.update(
             {
