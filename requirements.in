@@ -20,7 +20,7 @@ pytest
 pytest-django
 requests
 responses
-Pillow==7.0.0
+Pillow==7.1.0
 uwsgi==2.0.18
 whitenoise==5.0.1
 sentry-sdk

@@ -28,7 +28,6 @@ flake8-import-order==0.18.1  # via -r requirements.in
 flake8==3.7.9             # via -r requirements.in, flake8-broken-line, flake8-bugbear
 freezegun==0.3.15         # via -r requirements.in
 idna==2.9                 # via requests
-importlib-metadata==1.6.0  # via pluggy, pytest
 isort==4.3.21             # via -r requirements.in
 jmespath==0.9.5           # via boto3, botocore
 lxml==4.3.3               # via -r requirements.in
@@ -36,7 +35,7 @@ mccabe==0.6.1             # via flake8
 more-itertools==8.2.0     # via pytest
 packaging==20.3           # via pytest
 pathspec==0.7.0           # via black
-pillow==7.0.0             # via -r requirements.in
+pillow==7.1.0             # via -r requirements.in
 pluggy==0.13.1            # via pytest
 psycopg2-binary==2.8.4    # via -r requirements.in
 py==1.8.1                 # via pytest
@@ -61,7 +60,6 @@ urllib3==1.25.8           # via botocore, requests, sentry-sdk
 uwsgi==2.0.18             # via -r requirements.in
 wcwidth==0.1.9            # via pytest
 whitenoise==5.0.1         # via -r requirements.in
-zipp==3.1.0               # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
